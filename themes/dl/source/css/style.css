@@ -1,0 +1,189 @@
+@import "normalize.css/normalize.css";
+@import "fonts";
+
+
+html {
+  box-sizing: border-box;
+}
+
+@media only screen and (min-width: 50em) {
+  html {
+    border-top: 15px solid black;
+    border-bottom: 15px solid black;
+    border-left: 10px solid black;
+    border-right: 10px solid black
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Super Clarendon', 'Lucida Grande', 'Lucida Sans Unicode', Lucida, sans-serif;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Super Clarendon', Georgia, serif;
+  font-weight: bold;
+}
+
+
+img {
+  max-width: 100%;
+  width : 100%;
+  height: auto;
+}
+
+
+.dl-Logo-Wrap {
+  background-color: black;
+  padding: 20px 35px;
+}
+@media only screen and (min-width: 50em) {
+  .dl-Logo-Wrap {
+    background-color: white;
+  }
+}
+
+
+.dl-Site-Name {
+  display: block;
+}
+
+
+.dl-Logo path,
+.dl-Logo rect {
+  fill: white;
+}
+@media only screen and (min-width: 50em) {
+  .dl-Logo path,
+  .dl-Logo rect{
+    fill: black;
+  }
+}
+
+
+.dl-UIViewport {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media only screen and (min-width: 50em) {
+  .dl-UIViewport {
+    flex-direction: row;
+    min-height: 100vh;
+  }
+}
+
+
+:root {
+  --UIWrapper-fontSize: 1rem;
+  --UIWrapper-widthContent: 75%;
+  --UIWrapper-backgroundColor: #F6F6F6;
+}
+
+.dl-UIWrapper {
+  display: flex;
+  width: 100%;
+  background-color: var(--UIWrapper-backgroundColor);
+}
+
+@media only screen and (min-width: 50em) {
+  .dl-UIWrapper {
+    padding: 30px;
+    /* align-items: center; */
+    width: var(--UIWrapper-widthContent);
+  }
+}
+
+:root {
+  --Main-fontSize: 1rem;
+}
+
+.dl-Main {
+  flex: 1;
+  font-size: var(--Main-fontSize);
+}
+
+@media only screen and (min-width: 50em) {
+  .dl-Main {
+    flex: 0 85%;
+  }
+}
+
+
+.dl-Aside {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+
+.dl-Nav {
+  list-style-type: none;
+  margin-top: 15px;
+}
+
+  .dl-Nav-Item{
+    color:black;
+    font-size: 16px;
+    display: block;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #E6E6E6;
+    text-decoration: none;
+  }
+
+  .dl-Nav-Item:hover,
+  .dl-Nav-Item:focus{
+    border-bottom: 1px solid black;
+  }
+
+
+.dl-Container{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+
+.dl-Article-Title{
+  font-size: 24px;
+  line-height: 36px;
+  margin-bottom: 20px;
+}
+
+
+.dl-Article-Category{
+  display: block;
+  color: #C1C1C1;
+  padding: 10px 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-top: 1px solid #E6E6E6;
+  border-bottom: 1px solid #E6E6E6;
+}
+
+
+
+@media only screen and (min-width: 70em) {
+  .dl-Article-Description,
+  .dl-Article-Images{
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .dl-Article-Description{
+    width: 35%;
+    margin-right: 1.5rem;
+  }
+
+  .dl-Article-Images{
+    width: calc(65% - 1.5rem);
+    padding-top: 4.5rem;
+  }
+
+}

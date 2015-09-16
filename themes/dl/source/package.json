@@ -1,0 +1,20 @@
+{
+  "name": "dl",
+  "version": "0.1.0",
+  "devDependencies": {
+    "cssrecipes-vertical-rhythm": "^0.6.0",
+    "gulp": "^3.9.0",
+    "gulp-cssnext": "^1.0.1",
+    "gulp-watch": "^4.3.5",
+    "normalize.css": "^3.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": ""
+}

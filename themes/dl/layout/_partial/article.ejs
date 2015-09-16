@@ -1,0 +1,25 @@
+<article class="dl-Article dl-Article-type-<%= post.layout %> r-VerticalRhythm">
+  <div class="dl-Article-Description">
+    <h1 class="dl-Article-Title"><%- post.title %></h1>
+    <% if (post.layout !== 'page'){ %>
+      <span class="dl-Article-Category">
+        <% if (post.categories && post.categories.length){ %>
+          <% page.categories.each(function(category){ %>
+            <%= category.name %> /
+          <% }) %>
+        <% } %>
+      </span>
+
+
+    <% } %>
+    <%- post.content %>
+  </div><% if (post.layout !== 'page'){ %><!--
+  --><div class="dl-Article-Images">
+    <% if (post.photos && post.photos.length){ %>
+      <% post.photos.forEach(function(photo, i){ %>
+        <img src="<%- url_for(photo) %>" alt="">
+      <% }) %>
+    <% } %>
+  </div>
+  <% } %>
+</article>

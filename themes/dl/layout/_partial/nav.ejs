@@ -1,0 +1,9 @@
+<nav class="dl-Nav dl-Container">
+  <% site.posts.sort( 'date', -1).each(function(post){ %>
+    <a class="dl-Nav-Item" href="<%- url_for(post.path) %>"><%= post.title %></a>
+  <% }) %>
+  <a class="dl-Nav-Item" href="mailto:denisslef@gmail.com">Contact</a>
+</nav>
+
+
+
