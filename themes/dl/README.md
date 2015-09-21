@@ -11,10 +11,7 @@ Installing Hexo is quite easy. However, you do need to have a couple of other th
 
 ### Install Git
 
-- Windows: Download & install [git](https://git-scm.com/download/win).
 - Mac: Install it with [Homebrew](http://mxcl.github.com/homebrew/), [MacPorts](http://www.macports.org/) or [installer](http://sourceforge.net/projects/git-osx-installer/).
-- Linux (Ubuntu, Debian): `sudo apt-get install git-core`
-- Linux (Fedora, Red Hat, CentOS): `sudo yum install git-core`
 
 ### Install Node.js
 
@@ -22,19 +19,19 @@ The best way to install Node.js is with [nvm](https://github.com/creationix/nvm)
 
 cURL:
 
-``` bash
+```
 $ curl https://raw.github.com/creationix/nvm/master/install.sh | sh
 ```
 
 Wget:
 
-``` bash
+```
 $ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
 ```
 
 Once nvm is installed, restart the terminal and run the following command to install Node.js.
 
-``` bash
+```
 $ nvm install 0.12
 ```
 
@@ -44,9 +41,7 @@ Alternatively, download and run [the installer](http://nodejs.org/).
 
 Once all the requirements are installed, you can install Hexo with npm.
 
-``` bash
-$ npm install -g hexo-cli
-```
+`npm install -g hexo-cli`
 
 ## Installation
 
@@ -54,36 +49,32 @@ $ npm install -g hexo-cli
 
 Once you have downloaded the repo, run:
 
-``` bash
-npm install
-```
+`npm install`
 
 ## Create a new post
 
-``` bash
-hexo new post "my awesome post"
-```
+`hexo new post "my awesome post"`
 
 ## Run in server mode
-``` bash
-hexo server
-```
+
+`hexo server`
 
 ## Build static website
 
-``` bash
-hexo generate
-```
+`hexo generate`
 
 ## Deploy
 
-``` bash
-hexo deploy
-```
+`hexo deploy`
 
 # DL theme
 
 @todo
+
+## Favicon
+
+The favicon is located in `dl/source/favicon.png`.  
+If necessary, the path can be changed in dl's _config.yml file.
 
 ## Compiling CSS
 
