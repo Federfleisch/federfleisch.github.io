@@ -20,22 +20,22 @@ The best way to install Node.js is with [nvm](https://github.com/creationix/nvm)
 cURL:
 
 ```
-$ curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+curl https://raw.github.com/creationix/nvm/master/install.sh | sh
 ```
 
 Wget:
 
 ```
-$ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
+wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
 ```
 
 Once nvm is installed, restart the terminal and run the following command to install Node.js.
 
 ```
-$ nvm install 0.12
+nvm install 0.12
+nvm alias default 0.12 
 ```
-
-Alternatively, download and run [the installer](http://nodejs.org/).
+The last command will set the 0.12 node version as default on a shell.
 
 ### Install Hexo
 
@@ -53,7 +53,7 @@ Once you have downloaded the repo, run:
 
 ## Create a new post
 
-`hexo new post "my awesome post"`
+`hexo new post "my awesome post"` (avoid uppercase here)
 
 ## Run in server mode
 
