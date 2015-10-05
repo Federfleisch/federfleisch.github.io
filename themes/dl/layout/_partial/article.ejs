@@ -4,13 +4,15 @@
     <% if (post.layout !== 'page'){ %>
       <span class="dl-Article-Category">
         <% if (post.categories && post.categories.length){ %>
-          <% page.categories.each(function(category){ %>
-            <%= category.name %> /
+          <% page.categories.each(function(category, i){ %>
+            <% if (i === page.categories.length-1){ %>
+             <%= category.name %>
+            <% } else { %>
+              <%= category.name %> /
+            <% }   %>
           <% }) %>
         <% } %>
       </span>
-
-
     <% } %>
     <%- post.content %>
   </div><% if (post.layout !== 'page'){ %><!--
