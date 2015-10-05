@@ -1,8 +1,8 @@
 title: Typography26
 date: 2015-09-15 12:16:05
 category:
+- print
 - personal
-- typography
 photos:
 - /images/typography26/a.jpg
 - /images/typography26/b.jpg
@@ -31,4 +31,15 @@ photos:
 - /images/typography26/y.jpg
 ---
 
-Here is a project I wanted to start a long time ago, all I needed was inspiration and motivation.Every letter of the alphabet has a signification, I will try to represent them as abstract as possible. Sometimes it might even not be understandable. If it isn't, I win.
+What's better than a strict, daily graphic challenge to improve yourself?
+
+I've always wanted to start digging my mind and see what would come out from 
+the love I have for typography.
+
+About 6 months later, I've had designed 25 pieces of a work that I still 
+consider as the best evolutive result since I was a student in graphic design.
+
+I tried to represent each letter of the alphabet as abstract as possible, 
+it might sometimes not even be understandable. 
+
+Game's rule: if it isn't, I win!
