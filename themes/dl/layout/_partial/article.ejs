@@ -1,6 +1,5 @@
 <article class="dl-Article dl-Article-type-<%= post.layout %> r-VerticalRhythm">
   <div class="dl-Article-Description">
-    <h1 class="dl-Article-Title"><%- post.title %></h1>
     <% if (post.layout !== 'page'){ %>
       <span class="dl-Article-Category">
         <% if (post.categories && post.categories.length){ %>
@@ -14,6 +13,7 @@
         <% } %>
       </span>
     <% } %>
+    <h1 class="dl-Article-Title"><%- post.title %></h1>
     <%- post.content %>
   </div><% if (post.layout !== 'page'){ %><!--
   --><div class="dl-Article-Images">

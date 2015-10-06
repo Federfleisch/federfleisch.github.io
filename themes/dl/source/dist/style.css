@@ -465,10 +465,7 @@ html {
 
 @media only screen and (min-width: 50em) {
   html {
-    border-top: 15px solid black;
-    border-bottom: 15px solid black;
-    border-left: 10px solid black;
-    border-right: 10px solid black
+    border: 1.25rem solid black;
   }
 }
 
@@ -498,7 +495,8 @@ img {
 
 .dl-Logo-Wrap {
   background-color: black;
-  padding: 20px 35px;
+  padding: 20px 32px;
+  padding: 1.25rem 2rem;
 }
 @media only screen and (min-width: 50em) {
   .dl-Logo-Wrap {
@@ -561,9 +559,9 @@ img {
 
 @media only screen and (min-width: 50em) {
   .dl-UIWrapper {
-    padding: 30px;
+    padding: 1.875rem;
     /* align-items: center; */
-    width: 75%;
+    width: 80%;
   }
 }
 
@@ -605,52 +603,85 @@ img {
 
 .dl-Nav {
   list-style-type: none;
-  margin-top: 15px;
+  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
   .dl-Nav-Item{
-    color:black;
+    color: black;
     font-size: 16px;
+    font-size: 1rem;
     display: block;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 20px;
+    padding-top: 1.25rem;
+    padding-bottom: 20px;
+    padding-bottom: 1.25rem;
     border-bottom: 1px solid #E6E6E6;
+    border-bottom: 0.0625rem solid #E6E6E6;
     text-decoration: none;
+  }
+
+  .dl-Nav-Item:last-child{
+    border-bottom: 0;
+  }
+
+  .dl-Nav-Item--active{
+    font-weight: bold;
   }
 
   .dl-Nav-Item:hover,
   .dl-Nav-Item:focus{
     border-bottom: 1px solid black;
+    border-bottom: 0.0625rem solid black;
   }
 
 
 .dl-Container{
   padding-left: 30px;
+  padding-left: 1.875rem;
   padding-right: 30px;
+  padding-right: 1.875rem;
 }
 
 
 .dl-Article-Title{
   font-size: 24px;
+  font-size: 1.5rem;
   line-height: 36px;
   margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 
 .dl-Article-Category{
+  position: relative;
   display: block;
   color: #C1C1C1;
   padding: 10px 0;
+  padding: 0.625rem 0;
   font-family: 'Source Sans Pro', 'Lucida Grande', 'Lucida Sans Unicode', Lucida, sans-serif;
   font-size: 14px;
+  font-size: 0.875rem;
   text-transform: uppercase;
-  border-top: 1px solid #E6E6E6;
-  border-bottom: 1px solid #E6E6E6;
 }
-
+  .dl-Article-Category:after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 25%;
+    border-bottom: 1px solid #E6E6E6;
+    border-bottom: 0.0625rem solid #E6E6E6;
+  }
 
 
 @media only screen and (min-width: 70em) {
+
+  .dl-Article{
+    margin-top: 7.5rem;
+  }
+
   .dl-Article-Description,
   .dl-Article-Images{
     display: inline-block;
