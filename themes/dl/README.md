@@ -4,36 +4,35 @@ Documentation is [here](https://hexo.io/).
 
 ## Requirements
 
-Installing Hexo is quite easy. However, you do need to have a couple of other things installed first:
+Installing Hexo is quite easy. However, you do need to have a couple of other
+things installed first:
 
 - [Node.js](http://nodejs.org/)
 - [Git](http://git-scm.com/)
 
 ### Install Git
 
-- Mac: Install it with [Homebrew](http://mxcl.github.com/homebrew/), [MacPorts](http://www.macports.org/) or [installer](http://sourceforge.net/projects/git-osx-installer/).
+- Mac: Install it with [Homebrew](http://mxcl.github.com/homebrew/)
 
 ### Install Node.js
 
-The best way to install Node.js is with [nvm](https://github.com/creationix/nvm).
-
-cURL:
-
+Note: you will need to install `wget` first. Run:  
 ```
-curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+brew install wget
 ```
-
-Wget:
+Now, let's install Node.js.
+The best way to do it is with [nvm](https://github.com/creationix/nvm).
 
 ```
 wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
 ```
 
-Once nvm is installed, restart the terminal and run the following command to install Node.js.
+Once nvm is installed, restart the terminal and run the following command to
+install Node.js.
 
 ```
 nvm install 0.12
-nvm alias default 0.12 
+nvm alias default 0.12
 ```
 The last command will set the 0.12 node version as default on a shell.
 
@@ -53,19 +52,20 @@ Once you have downloaded the repo, run:
 
 ## Create a new post
 
-`hexo new post "my awesome post"` (avoid uppercase here)
+`hexo new post "my awesome post"` (avoid uppercase here).
 
 ## Run in server mode
 
-`hexo server`
+`hexo server` is used to visualize your work on a local server.
 
 ## Build static website
 
-`hexo generate`
+`hexo generate` is used to generate the static pages.
 
 ## Deploy
 
-`hexo deploy`
+`hexo deploy` is used to deploy you site to your preferred environment (see
+CNAME).
 
 # DL theme
 
