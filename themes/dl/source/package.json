@@ -1,4 +1,6 @@
 {
+  "description": "Denis Lefèvre website theme",
+  "repository": "https://github.com/Federfleisch/federfleisch.github.io/",
   "name": "dl",
   "version": "0.1.0",
   "devDependencies": {
@@ -14,7 +16,6 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": ""
-  },
-  "homepage": ""
+    "url": "https://github.com/Federfleisch/federfleisch.github.io/issues"
+  }
 }
