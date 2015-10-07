@@ -3,12 +3,24 @@ date: 1990-04-18
 layout: page
 ---
 
-Symmetry enthusiast and pixel lover, I want to make the web a better place by
-creating shiny designs.
+I learned graphic design in Belgium. In a small town called Namur, I have been
+exploring the many worlds of design such as web ergonomy, branding development,
+logo creation, graphic and motion design.
 
-I create rich user experience within well thought out interfaces.
+I finally found my way in web design but I remain a jack of all trades.
 
-Keeping it simple and efficient, everything is about the detail.
+Behind the designer is a boy from the 90's who loves a lot of things. As a
+child, technology hit me hard and I quicly became a true fan of game consoles
+and computers.
 
-Specialities: webdesign, user interface & experience, internet, digital
-marketing, information architecture, typography, logo & motion design.
+I grew up with music and I have been a guitar player for a while now. I can't
+tell how many times I have banged my head in metal gigs.
+
+Beyond that, I am also interested in many foreign languages, such as German or
+Japanese.
+
+Check out my resume for more details.
+
+—D
+
+Oh, and i case you wonder, I choose Salamander.
