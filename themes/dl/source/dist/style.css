@@ -458,6 +458,243 @@ th {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('../fonts/sourcesanspro-light-webfont.eot');
+  src: url('../fonts/sourcesanspro-light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sourcesanspro-light-webfont.woff2') format('woff2'),
+       url('../fonts/sourcesanspro-light-webfont.woff') format('woff'),
+       url('../fonts/sourcesanspro-light-webfont.ttf') format('truetype'),
+       url('../fonts/sourcesanspro-light-webfont.svg#source_sans_prolight') format('svg');
+  font-weight: 200;
+  font-style: normal;
+}
+/**
+ * Vertical rhythm
+ *
+ * http://www.smashingmagazine.com/2012/12/17/css-baseline-the-good-the-bad-and-the-ugly/
+ * https://medium.com/typography/e258fce47a9b
+ * http://csswizardry.com/2012/06/single-direction-margin-declarations/
+ *
+ * What is font-size, line-height & cap-height ?
+ * https://d262ilb51hltx0.cloudfront.net/max/800/1*g7Lpl9hrmuSHxOCqMG9Tjg.png
+ *
+ *
+ * The_Mathematics_of_Music_and_Harmonics.pdf
+ n 2n/12
+ 0 1.000
+ 1 1.059
+ 2 1.122
+ 3 Minor Third 1.189 (1.200)
+ 4 Major Third 1.260 (1.250)
+ 5 Perfect Fourth 1.335 (1.333)
+ 6 1.414
+ 7 Perfect Fifth 1.498 (1.500)
+ 8 1.587
+ 9 1.682
+ 10 1.782
+ 11 1.888
+ 12 2.000
+ *
+ */
+
+/* choose your ratio, then import this file */
+/*eg: @import "./cssrecipes-vertical-rhthym/lib/ratio/minor-third.css";*/
+
+:root {
+  /* possible override */
+  /*--r-fontSizeRatio: 1;*/
+  /*--r-lineHeight: calc(--r-fontSize * 1.5);*/
+
+  /* recommanded override (depend on your font) */
+  /*--r-capHeight: X; */
+}
+
+.r-VerticalRhythm {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  line-height: 1.5625rem;
+}
+.r-VerticalRhythm h1,
+.r-VerticalRhythm .h1,
+.r-VerticalRhythm h2,
+.r-VerticalRhythm .h2,
+.r-VerticalRhythm h3,
+.r-VerticalRhythm .h3,
+.r-VerticalRhythm h4,
+.r-VerticalRhythm .h4,
+.r-VerticalRhythm h5,
+.r-VerticalRhythm .h5,
+.r-VerticalRhythm h6,
+.r-VerticalRhythm .h6 {
+  margin-top: 0;
+}
+
+
+/**
+ * Heading 1
+ *
+ * <h1>Heading 1</h1>
+ * <div class="h1">Heading 1</div>
+ */
+.r-VerticalRhythm h1,
+.r-VerticalRhythm .h1 {
+  font-size: 33px;
+  font-size: 2.0736rem;
+  line-height: 50px;
+  line-height: 3.125rem;
+  padding-top: 6px;
+  padding-top: 0.40625rem;
+  margin-bottom: 18px;
+  margin-bottom: 1.15625rem;
+}
+
+/**
+ * Heading 2
+ *
+ * <h2>Heading 2</h2>
+ * <div class="h2">Heading 2</div>
+ */
+.r-VerticalRhythm h2,
+.r-VerticalRhythm .h2 {
+  font-size: 27px;
+  font-size: 1.728rem;
+  line-height: 25px;
+  line-height: 1.5625rem;
+  padding-top: 6px;
+  padding-top: 0.40625rem;
+  margin-bottom: 18px;
+  margin-bottom: 1.15625rem;
+}
+
+/**
+ * Heading 3
+ *
+ * <h3>Heading 3</h3>
+ * <div class="h3">Heading 3</div>
+ */
+.r-VerticalRhythm h3,
+.r-VerticalRhythm .h3 {
+  font-size: 23px;
+  font-size: 1.44rem;
+  line-height: 25px;
+  line-height: 1.5625rem;
+  padding-top: 6px;
+  padding-top: 0.40625rem;
+  margin-bottom: 18px;
+  margin-bottom: 1.15625rem;
+}
+
+/**
+ * Heading 4
+ *
+ * <h4>Heading 4</h4>
+ * <div class="h4">Heading 4</div>
+ */
+.r-VerticalRhythm h4,
+.r-VerticalRhythm .h4 {
+  font-size: 19px;
+  font-size: 1.2rem;
+  line-height: 25px;
+  line-height: 1.5625rem;
+  padding-top: 6px;
+  padding-top: 0.40625rem;
+  margin-bottom: 18px;
+  margin-bottom: 1.15625rem;
+}
+
+/**
+ * Heading 5
+ *
+ * <h5>Heading 5</h5>
+ * <div class="h5">Heading 5</div>
+ */
+.r-VerticalRhythm h5,
+.r-VerticalRhythm .h5 {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  line-height: 1.5625rem;
+  padding-top: 6px;
+  padding-top: 0.40625rem;
+  margin-bottom: 18px;
+  margin-bottom: 1.15625rem;
+}
+
+/**
+ * Heading 6
+ *
+ * <h6>Heading 6</h6>
+ * <div class="h6">Heading 6</div>
+ */
+.r-VerticalRhythm h6,
+.r-VerticalRhythm .h6 {
+  font-size: 13px;
+  font-size: 0.83333rem;
+  line-height: 25px;
+  line-height: 1.5625rem;
+  padding-top: 6px;
+  padding-top: 0.40625rem;
+  margin-bottom: 18px;
+  margin-bottom: 1.15625rem;
+}
+
+/* since h5 & h6 always small, it's interesting to have a difference with classic text */
+.r-VerticalRhythm h5,
+.r-VerticalRhythm .h5
+.r-VerticalRhythm h6,
+.r-VerticalRhythm .h6 { text-decoration: underline }
+/**
+ * Small
+ *
+ * <small>small</small>
+ * <small><small>smaller</small></small>
+ */
+.r-VerticalRhythm small { font-size: 0.83333em}
+
+/* misc, really */
+.r-VerticalRhythm ul,
+.r-VerticalRhythm ol,
+.r-VerticalRhythm dl,
+.r-VerticalRhythm p,
+.r-VerticalRhythm figure,
+.r-VerticalRhythm pre,
+.r-VerticalRhythm table,
+.r-VerticalRhythm fieldset,
+.r-VerticalRhythm hr {
+  margin-top: 0;
+  margin-bottom: 25px;
+  margin-bottom: 1.5625rem;
+}
+/* vertical rhythm helper */
+
+.r-VerticalRhythm-helper {
+  position: relative;
+  overflow: auto;
+}
+
+.r-VerticalRhythm-helper:after {
+  content: "";
+  z-index: 100000; /* should be enough right ?*/
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, .25) 1px, transparent 1px) 0 0 / 100% 1.5625rem, -webkit-linear-gradient(top, rgba(0, 0, 0, 0.16749999999999998), transparent 1px) 0 0.78125rem / 100% 1.5625rem, -webkit-linear-gradient(top, rgba(0, 0, 0, 0.08499999999999999), transparent 1px) 0 0.39063rem / 100% 1.5625rem, -webkit-linear-gradient(top, rgba(0, 0, 0, 0.08499999999999999), transparent 1px) 0 1.17188rem / 100% 1.5625rem;
+
+  background: linear-gradient(to bottom, rgba(0, 0, 0, .25) 1px, transparent 1px) 0 0 / 100% 1.5625rem,
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.16749999999999998), transparent 1px) 0 0.78125rem / 100% 1.5625rem,
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.08499999999999999), transparent 1px) 0 0.39063rem / 100% 1.5625rem,
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.08499999999999999), transparent 1px) 0 1.17188rem / 100% 1.5625rem;
+}
+:root { /* minor third ratio */ /* depend on fontSize*/ /* depend on fontSize*/ /* depend on fontSize*/ /* depend on fontSize*/ /* depend on fontSize*/ /* depend on fontSize*/
+
+  /* not rem so you can use .small in .small */
+}
+
 
 html {
   box-sizing: border-box;
@@ -465,7 +702,7 @@ html {
 
 @media only screen and (min-width: 50em) {
   html {
-    border: 1.25rem solid black;
+    border: 1.25rem solid #1B1E1F;
   }
 }
 
@@ -510,7 +747,7 @@ img {
 }
 @media only screen and (min-width: 50em) {
   .dl-Logo-Wrap {
-    background-color: white;
+    background-color: #101213;
   }
 }
 
@@ -523,12 +760,6 @@ img {
 .dl-Logo path,
 .dl-Logo rect {
   fill: white;
-}
-@media only screen and (min-width: 50em) {
-  .dl-Logo path,
-  .dl-Logo rect{
-    fill: black;
-  }
 }
 
 
@@ -546,6 +777,8 @@ img {
   -webkit-align-items: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
+  background-color: #101213;
+  color: #686F76;
 }
 @media only screen and (min-width: 50em) {
   .dl-UIViewport {
@@ -564,14 +797,13 @@ img {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  background-color: #F6F6F6;
 }
 
 @media only screen and (min-width: 50em) {
   .dl-UIWrapper {
     padding: 1.875rem;
     /* align-items: center; */
-    width: 80%;
+    width: 65%;
   }
 }
 
@@ -618,16 +850,20 @@ img {
 }
 
   .dl-Nav-Item{
-    color: black;
-    font-size: 16px;
-    font-size: 1rem;
+    color: #686F76;
+    font-size: 14px;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    font-family: 'Source Sans Pro', 'Lucida Grande', 'Lucida Sans Unicode', Lucida, sans-serif;
+    font-weight: 200;
+    letter-spacing: 4px;
     display: block;
     padding-top: 20px;
     padding-top: 1.25rem;
     padding-bottom: 20px;
     padding-bottom: 1.25rem;
-    border-bottom: 1px solid #E6E6E6;
-    border-bottom: 0.0625rem solid #E6E6E6;
+    border-bottom: 1px solid #1D2122;
+    border-bottom: 0.0625rem solid #1D2122;
     text-decoration: none;
   }
 
@@ -641,6 +877,7 @@ img {
 
   .dl-Nav-Item:hover,
   .dl-Nav-Item:focus{
+    color: #FFFFFF;
     border-bottom: 1px solid black;
     border-bottom: 0.0625rem solid black;
   }
@@ -662,6 +899,9 @@ img {
   margin-bottom: 1.25rem;
 }
 
+.dl-Article-highlight{
+  color: #FFFFFF;
+}
 
 .dl-Article-Category{
   position: relative;
@@ -699,8 +939,9 @@ img {
   }
 
   .dl-Article-Description{
-    width: 35%;
     margin-right: 1.5rem;
+    font-size: 1.75rem;
+    line-height:  2.375rem;
   }
 
   .dl-Article-Images{
