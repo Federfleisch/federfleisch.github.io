@@ -741,14 +741,9 @@ img {
 
 
 .dl-Logo-Wrap {
-  background-color: black;
+  background-color: #101213;
   padding: 20px 32px;
   padding: 1.25rem 2rem;
-}
-@media only screen and (min-width: 50em) {
-  .dl-Logo-Wrap {
-    background-color: #101213;
-  }
 }
 
 
@@ -847,7 +842,9 @@ img {
   list-style-type: none;
   margin-top: 20px;
   margin-top: 1.25rem;
+
 }
+
 
   .dl-Nav-Item{
     color: #686F76;
@@ -862,9 +859,14 @@ img {
     padding-top: 1.25rem;
     padding-bottom: 20px;
     padding-bottom: 1.25rem;
+    padding-left: 30px;
+    padding-left: 1.875rem;
+    padding-right: 30px;
+    padding-right: 1.875rem;
     border-bottom: 1px solid #1D2122;
     border-bottom: 0.0625rem solid #1D2122;
     text-decoration: none;
+    position: relative;
   }
 
   .dl-Nav-Item:last-child{
@@ -872,7 +874,18 @@ img {
   }
 
   .dl-Nav-Item--active{
-    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #1B1E1F;
+  }
+
+  .dl-Nav-Item:not(.dl-Nav-Item--active){
+    display: none;
+  }
+
+  @media only screen and (min-width: 50em) {
+  .dl-Nav-Item:not(.dl-Nav-Item--active){
+      display: block;
+    }
   }
 
   .dl-Nav-Item:hover,
@@ -906,13 +919,16 @@ img {
 .dl-Article-Category{
   position: relative;
   display: block;
-  color: #C1C1C1;
-  padding: 10px 0;
-  padding: 0.625rem 0;
+  color: #FFFFFF;
+  padding: 10px 0 15px;
+  padding: 0.625rem 0 0.9375rem;
   font-family: 'Source Sans Pro', 'Lucida Grande', 'Lucida Sans Unicode', Lucida, sans-serif;
   font-size: 14px;
   font-size: 0.875rem;
   text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 26px;
+  margin-bottom: 1.625rem;
 }
   .dl-Article-Category:after{
     content: "";
@@ -920,9 +936,9 @@ img {
     bottom: 0;
     left: 0;
     height: 1px;
-    width: 25%;
-    border-bottom: 1px solid #E6E6E6;
-    border-bottom: 0.0625rem solid #E6E6E6;
+    width: 15%;
+    border-bottom: 1px solid #FFFFFF;
+    border-bottom: 0.0625rem solid #FFFFFF;
   }
 
 

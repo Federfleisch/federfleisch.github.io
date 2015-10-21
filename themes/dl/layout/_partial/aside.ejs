@@ -4,5 +4,26 @@
       <%- partial('_partial/logo') %>
     </a>
   </header>
+
+  <article class="dl-Container dl-Article dl-Article-type-<%= page.layout %> r-VerticalRhythm">
+    <div class="dl-Article-Description">
+      <% if (page.layout !== 'page'){ %>
+        <span class="dl-Article-Category">
+          <% if (page.categories && page.categories.length){ %>
+            <% page.categories.each(function(category, i){ %>
+              <% if (i === page.categories.length-1){ %>
+               <%= category.name %>
+              <% } else { %>
+                <%= category.name %> /
+              <% }   %>
+            <% }) %>
+          <% } %>
+        </span>
+      <% } %>
+      <h1 class="dl-Article-Title visuallyHidden"><%- page.title %></h1>
+      <%- page.content %>
+    </div>
+  </article>
+
   <%- partial('_partial/nav') %>
 </aside>

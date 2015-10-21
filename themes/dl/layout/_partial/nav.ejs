@@ -1,6 +1,6 @@
-<nav class="dl-Nav dl-Container">
+<nav class="dl-Nav">
   <% site.posts.sort( 'date', -1).each(function(post){ %>
-    <a class="dl-Nav-Item <% if (is_current(post.path)){ %> dl-Nav-Item--active <% } %>" href="<%- url_for(post.path) %>"><%= post.title %></a>
+    <a class="dl-Nav-Item<% if (is_current(post.path)){ %> dl-Nav-Item--active<% } %>" href="<%- url_for(post.path) %>"><%= post.title %></a>
   <% }) %>
   <a class="dl-Nav-Item" href="mailto:denisslef@gmail.com">Contact</a>
 </nav>
