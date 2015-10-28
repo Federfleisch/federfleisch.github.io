@@ -8,16 +8,34 @@ html {
   box-sizing: border-box;
 }
 
-@media only screen and (min-width: 50em) {
-  html {
-    border: 1.25rem solid #1B1E1F;
-  }
-}
-
 body {
   margin: 0;
   padding: 0;
   font-family: 'Super Clarendon', 'Lucida Grande', 'Lucida Sans Unicode', Lucida, sans-serif;
+}
+
+@media only screen and (min-width: 50em) {
+  body:before,
+  body:after {
+    content: "";
+    position: fixed;
+    background: #1B1E1F;
+    left: 0;
+    right: 0;
+    height: 1.25rem;
+  }
+  body:before {
+    top: 0;
+  }
+  body:after {
+    bottom: 0;
+  }
+  body {
+    border-left: 1.25rem solid #1B1E1F;
+    border-right: 1.25rem solid #1B1E1F;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
 }
 
 *, *:before, *:after {
