@@ -725,8 +725,6 @@ body {
   body {
     border-left: 1.25rem solid #1B1E1F;
     border-right: 1.25rem solid #1B1E1F;
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
   }
 }
 
@@ -760,15 +758,25 @@ img {
 
 .dl-Logo-Wrap {
   background-color: #101213;
-  padding: 20px 32px;
-  padding: 1.25rem 2rem;
+  padding: 32px;
+  padding: 2rem;
 }
-
+  @media only screen and (min-width: 50em) {
+    .dl-Logo-Wrap {
+      padding: 3.75rem;
+    }
+  }
 
 .dl-Site-Name {
   display: block;
 }
 
+.dl-Logo{
+  width: 264px;
+  width: 16.5rem;
+  height: 64px;
+  height: 4rem;
+}
 
 .dl-Logo path,
 .dl-Logo rect {
@@ -792,6 +800,7 @@ img {
           align-items: stretch;
   background-color: #101213;
   color: #686F76;
+  min-height: 100vh;
 }
 @media only screen and (min-width: 50em) {
   .dl-UIViewport {
@@ -800,7 +809,6 @@ img {
     -webkit-flex-direction: row;
         -ms-flex-direction: row;
             flex-direction: row;
-    min-height: 100vh;
   }
 }
 
@@ -832,9 +840,9 @@ img {
 @media only screen and (min-width: 50em) {
   .dl-Main {
     -webkit-box-flex: 0;
-    -webkit-flex: 0 85%;
-        -ms-flex: 0 85%;
-            flex: 0 85%;
+    -webkit-flex: 0 50%;
+        -ms-flex: 0 50%;
+            flex: 0 50%;
   }
 }
 
@@ -855,13 +863,27 @@ img {
           flex: 1;
 }
 
+@media only screen and (min-width: 50em) {
+  .dl-Aside {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+}
 
 .dl-Nav {
   list-style-type: none;
   margin-top: 20px;
   margin-top: 1.25rem;
-
+  padding-left: 20px;
+  padding-left: 1.25rem;
+  padding-right: 20px;
+  padding-right: 1.25rem;
 }
+  @media only screen and (min-width: 50em) {
+    .dl-Nav{
+      padding-left: 3.75rem;
+    }
+  }
 
 
   .dl-Nav-Item{
@@ -877,8 +899,6 @@ img {
     padding-top: 1.25rem;
     padding-bottom: 20px;
     padding-bottom: 1.25rem;
-    padding-left: 30px;
-    padding-left: 1.875rem;
     padding-right: 30px;
     padding-right: 1.875rem;
     border-bottom: 1px solid #1D2122;
@@ -896,30 +916,31 @@ img {
     background-color: #1B1E1F;
   }
 
-  .dl-Nav-Item:not(.dl-Nav-Item--active){
-    display: none;
-  }
-
-  @media only screen and (min-width: 50em) {
-  .dl-Nav-Item:not(.dl-Nav-Item--active){
-      display: block;
-    }
-  }
+      @media only screen and (min-width: 50em) {
+        .dl-Nav-Item--active{
+          padding-left: 1.875rem;
+        }
+      }
 
   .dl-Nav-Item:hover,
   .dl-Nav-Item:focus{
     color: #FFFFFF;
-    border-bottom: 1px solid black;
-    border-bottom: 0.0625rem solid black;
   }
 
 
 .dl-Container{
-  padding-left: 30px;
-  padding-left: 1.875rem;
-  padding-right: 30px;
-  padding-right: 1.875rem;
+  padding-left: 20px;
+  padding-left: 1.25rem;
+  padding-right: 20px;
+  padding-right: 1.25rem;
 }
+
+  @media only screen and (min-width: 50em) {
+    .dl-Container{
+      padding-left: 3.75rem;
+      padding-right: 1.875rem;
+    }
+  }
 
 
 .dl-Article-Title{
@@ -960,7 +981,7 @@ img {
   }
 
 
-@media only screen and (min-width: 70em) {
+@media only screen and (min-width: 60em) {
 
   .dl-Article{
     margin-top: 7.5rem;
@@ -979,8 +1000,6 @@ img {
   }
 
   .dl-Article-Images{
-    width: calc(65% - 1.5rem);
-    padding-top: 4.5rem;
+    padding-top: 23.75rem;
   }
-
 }
