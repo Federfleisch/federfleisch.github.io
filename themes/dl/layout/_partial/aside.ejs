@@ -1,5 +1,5 @@
-<aside class="dl-Aside" role="complementary">
-  <header class="dl-Header dl-Logo-Wrap">
+<aside id="dl-Aside" class="dl-Aside" role="complementary">
+  <header id="dl-Header" class="dl-Header dl-Logo-Wrap">
     <a class="dl-Site-Name" href="/">
       <%- partial('_partial/logo') %>
     </a>
@@ -7,17 +7,15 @@
 
   <article class="dl-Container dl-Article dl-Article-type-<%= page.layout %> r-VerticalRhythm">
     <div class="dl-Article-Description">
-      <% if (page.layout !== 'index'){ %>
+      <% if (page.categories && page.categories.length){ %>
         <span class="dl-Article-Category">
-          <% if (page.categories && page.categories.length){ %>
-            <% page.categories.each(function(category, i){ %>
-              <% if (i === page.categories.length-1){ %>
-               <%= category.name %>
-              <% } else { %>
-                <%= category.name %> /
-              <% }   %>
-            <% }) %>
+        <% page.categories.each(function(category, i){ %>
+          <% if (i === page.categories.length-1){ %>
+           <%= category.name %>
+          <% } else { %>
+            <%= category.name %> /
           <% } %>
+        <% }) %>
         </span>
       <% } %>
       <h1 class="dl-Article-Title visuallyHidden"><%- page.title %></h1>
