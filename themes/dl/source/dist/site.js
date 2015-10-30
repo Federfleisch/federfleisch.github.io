@@ -1,33 +1,32 @@
-var nav = document.getElementById('dl-Nav')
-var header = document.getElementById('dl-Header')
-var aside = document.getElementById('dl-Aside')
-var asideFirstChild = aside.firstChild
-var asideLastChild = aside.lastChild
+var nav = document.getElementById('dl-Nav');
+var aside = document.getElementById('dl-Aside');
+var asideFirstChild = aside.firstChild;
+var asideLastChild = aside.lastChild;
 
-var isRoot = location.pathname == "/";
+  isRoot = location.pathname == "/";
 
-var events = ['resize', 'load'];
-
-for (var e in events) {
-  var evt = events[e];
-  var loopThroughEvents = function(evt) {
-    window.addEventListener( evt, function() {
-      console.log(evt)
-    })
+function onResizeOrLoad() {
+  if (isRoot) {
+    return;
+  }
+  if (window.innerWidth < 768) {
+    moveNavUp()
+    moveNavItemActive()
+  }
+  if (window.innerWidth > 768) {
+    moveNavDown()
   }
 }
 
-window.addEventListener('resize', function () {
-  if (isRoot == false){
-    if (window.innerWidth < 768) {
-      moveNavUp()
-    }
-    if (window.innerWidth > 768) {
-      moveNavDown()
-    }
-  }
-});
+window.addEventListener("load", onResizeOrLoad);
+window.addEventListener("resize", onResizeOrLoad);
 
+
+function moveNavItemActive () {
+  var navItemActive = document.querySelector('.dl-Nav-Item--active');
+  var navFirstChild = nav.firstChild;
+  nav.insertBefore(navItemActive, navFirstChild);
+}
 
 function moveNavUp () {
   insertAfter(asideFirstChild.nextSibling, nav);
