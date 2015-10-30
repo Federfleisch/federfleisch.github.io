@@ -874,10 +874,6 @@ img {
   list-style-type: none;
   margin-top: 20px;
   margin-top: 1.25rem;
-  padding-left: 20px;
-  padding-left: 1.25rem;
-  padding-right: 20px;
-  padding-right: 1.25rem;
 }
   @media only screen and (min-width: 50em) {
     .dl-Nav{
@@ -899,8 +895,10 @@ img {
     padding-top: 1.25rem;
     padding-bottom: 20px;
     padding-bottom: 1.25rem;
-    padding-right: 30px;
-    padding-right: 1.875rem;
+    padding-left: 20px;
+    padding-left: 1.25rem;
+    padding-right: 20px;
+    padding-right: 1.25rem;
     border-bottom: 1px solid #1D2122;
     border-bottom: 0.0625rem solid #1D2122;
     text-decoration: none;
@@ -914,17 +912,57 @@ img {
   .dl-Nav-Item--active{
     color: #FFFFFF;
     background-color: #1B1E1F;
+    position: relative;
+  }
+
+  .dl-Nav-Item--active:before,
+  .dl-Nav-Item--active:after{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 28px;
+    top: 1.75rem;
+    width: 10px;
+    width: 0.625rem;
+    height: 2px;
+    height: 0.165rem;
+    background-color: #686F76;
+    -webkit-transform: rotate(40deg);
+        -ms-transform: rotate(40deg);
+            transform: rotate(40deg);
+  }
+
+  .dl-Nav-Item--active:before{
+    right: 28px;
+    right: 1.75rem;
+  }
+
+  .dl-Nav-Item--active:after{
+    right: 21px;
+    right: 1.35rem;
+    -webkit-transform: rotate(-40deg);
+        -ms-transform: rotate(-40deg);
+            transform: rotate(-40deg);
   }
 
       @media only screen and (min-width: 50em) {
         .dl-Nav-Item--active{
           padding-left: 1.875rem;
         }
+        .dl-Nav-Item--active:before,
+        .dl-Nav-Item--active:after{
+          content: none;
+        }
       }
 
   .dl-Nav-Item:hover,
   .dl-Nav-Item:focus{
     color: #FFFFFF;
+  }
+
+  .dl-Nav-Item--active:hover:before,
+  .dl-Nav-Item--active:hover:after{
+    background-color: #FFFFFF;
   }
 
 
