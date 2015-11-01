@@ -1,4 +1,4 @@
-<nav id="dl-Nav" class="dl-Nav">
+<nav id="dl-Nav" class="dl-Nav<% if (page.layout !== 'index'){ %> dl-Nav-innerPages<% } %>">
   <% site.posts.sort( 'date', -1).each(function(post){ %>
     <a class="dl-Nav-Item<% if (is_current(post.path)){ %> dl-Nav-Item--active<% } %>" href="<%- url_for(post.path) %>"><%= post.title %></a>
   <% }) %>

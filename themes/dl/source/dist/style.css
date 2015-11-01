@@ -874,6 +874,8 @@ img {
   list-style-type: none;
   margin-top: 20px;
   margin-top: 1.25rem;
+  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
   @media only screen and (min-width: 50em) {
     .dl-Nav{
@@ -907,6 +909,40 @@ img {
 
   .dl-Nav-Item:last-child{
     border-bottom: 0;
+  }
+
+  .dl-Nav-innerPages .dl-Nav-Item:not(.dl-Nav-Item--active){
+    visibility: hidden;
+    opacity: 0;
+    width: 0;
+    position: absolute;
+    -webkit-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+            transform: scale(1.5);
+    -webkit-transition:  opacity .15s, -webkit-transform .3s ease-out;
+            transition:  opacity .15s, transform .3s ease-out;
+  }
+  @media only screen and (min-width: 50em) {
+    .dl-Nav-innerPages .dl-Nav-Item:not(.dl-Nav-Item--active){
+      position: relative;
+      visibility: visible;
+      opacity: 1;
+      -webkit-transform: none;
+          -ms-transform: none;
+              transform: none;
+      padding-left: 0;
+      width: 100%;
+    }
+  }
+
+  .dl-Nav--isOpen > .dl-Nav-Item:not(.dl-Nav-Item--active){
+    position: relative;
+    visibility: visible;
+    opacity: 1;
+    width: 100%;
+    -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+            transform: scale(1);
   }
 
   .dl-Nav-Item--active{
