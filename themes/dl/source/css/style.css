@@ -59,6 +59,16 @@ h1, h2, h3, h4, h5, h6{
 }
 
 
+a{
+  color: #FFC31C;
+  text-decoration: none;
+  transition: color .25s ease-out;
+}
+
+a:hover{
+  color: color(#FFC31C shade(25%));;
+}
+
 img {
   max-width: 100%;
   width : 100%;

@@ -751,6 +751,17 @@ h1, h2, h3, h4, h5, h6{
 }
 
 
+a{
+  color: #FFC31C;
+  text-decoration: none;
+  -webkit-transition: color .25s ease-out;
+          transition: color .25s ease-out;
+}
+
+a:hover{
+  color: rgb(191, 146, 21);;
+}
+
 img {
   max-width: 100%;
   width : 100%;
