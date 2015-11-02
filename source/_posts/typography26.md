@@ -31,15 +31,7 @@ photos:
 - /images/typography26/y.jpg
 ---
 
-What's better than a strict, daily graphic challenge to improve yourself?
-
-I've always wanted to start digging my mind and see what would come out from
-the love I have for typography.
+I've always wanted to start digging my mind and see what would come out from the love I have for typography.
 
 About 6 months later, I've had designed 25 pieces of a work that I still
 consider as the best evolutive result since I was a student in graphic design.
-
-I tried to represent each letter of the alphabet as abstract as possible,
-it might sometimes not even be understandable.
-
-Game's rule: if it isn't, I win!
