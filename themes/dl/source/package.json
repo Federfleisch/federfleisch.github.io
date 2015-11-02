@@ -7,7 +7,10 @@
     "cssrecipes-vertical-rhythm": "^0.6.0",
     "gulp": "^3.9.0",
     "gulp-cssnext": "^1.0.1",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-uglify": "^1.4.2",
     "gulp-watch": "^4.3.5",
+    "imagemin-pngquant": "^4.2.0",
     "normalize.css": "^3.0.3"
   },
   "scripts": {
