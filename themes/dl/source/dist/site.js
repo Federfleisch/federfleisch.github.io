@@ -1,43 +1,53 @@
-var nav = document.getElementById('dl-Nav');
-var aside = document.getElementById('dl-Aside');
-var asideFirstChild = aside.firstChild;
-var asideLastChild = aside.lastChild;
-var navItemActive = document.querySelector('.dl-Nav-Item--active');
-var navFirstChild = nav.firstChild;
-var isRoot = location.pathname === "/";
+var dlWeb = (function() {
 
-function onResizeOrLoad() {
-  if (isRoot) {
-    return;
+  var nav = document.getElementById('dl-Nav');
+  var aside = document.getElementById('dl-Aside');
+  var asideFirstChild = aside.firstChild;
+  var asideLastChild = aside.lastChild;
+  var navItemActive = document.querySelector('.dl-Nav-Item--active');
+  var navFirstChild = nav.firstChild;
+  var isRoot = location.pathname === "/";
+
+  function onResizeOrLoad() {
+    if (isRoot) {
+      return;
+    }
+    if (window.innerWidth < 768) {
+      moveNavUp();
+      moveNavItemActive();
+      openNavOnClickActiveItem();
+    }
+    if (window.innerWidth > 768) {
+      moveNavDown();
+    }
   }
-  if (window.innerWidth < 768) {
-    moveNavUp();
-    moveNavItemActive();
-    openNavOnClickActiveItem();
+
+  function openNavOnClickActiveItem() {
+    navItemActive.addEventListener('click', function(e) {
+      e.preventDefault();
+      nav.classList.toggle('dl-Nav--isOpen');
+    });
   }
-  if (window.innerWidth > 768) {
-    moveNavDown();
+
+  function moveNavItemActive() {
+    nav.insertBefore(navItemActive, navFirstChild);
   }
-}
 
-window.addEventListener("load", onResizeOrLoad);
-window.addEventListener("resize", onResizeOrLoad);
+  function moveNavUp() {
+    aside.insertBefore(nav, asideFirstChild.nextSibling.nextSibling);
+  }
 
-function openNavOnClickActiveItem() {
-  navItemActive.addEventListener('click', function(e) {
-    e.preventDefault();
-    nav.classList.toggle('dl-Nav--isOpen');
-  });
-}
+  function moveNavDown() {
+    aside.insertBefore(nav, asideLastChild);
+  }
 
-function moveNavItemActive() {
-  nav.insertBefore(navItemActive, navFirstChild);
-}
 
-function moveNavUp() {
-  aside.insertBefore(nav, asideFirstChild.nextSibling.nextSibling);
-}
+  return {
+    setup: function setup() {
+      window.addEventListener("load", onResizeOrLoad);
+      window.addEventListener("resize", onResizeOrLoad);
+    }
+  }
+})();
 
-function moveNavDown() {
-  aside.insertBefore(nav, asideLastChild);
-}
+dlWeb.setup()
