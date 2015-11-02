@@ -1,22 +1,24 @@
 var gulp = require('gulp'),
+    argv = require('yargs').argv,
+    gulpif = require('gulp-if'),
     watch = require('gulp-watch'),
     cssnext = require('gulp-cssnext'),
-    uglify = require('gulp-uglify')
+    uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant');
 
 
 gulp.task('styles', function() {
   gulp.src("css/style.css")
-  .pipe(cssnext({
-    compress: false,
-  }))
-  .pipe(gulp.dest("./dist/"))
+  .pipe(cssnext())
+  .pipe(gulpif(argv.production, cssnext({compress: true})))
+  .pipe(gulp.dest("./dist/"));
 });
 
 gulp.task('js', function () {
   gulp.src('js/site.js')
-    .pipe(gulp.dest('./dist/'));
+  .pipe(gulpif(argv.production, uglify()))
+  .pipe(gulp.dest('./dist/'));
 });
 
 // gulp.task('img', function () {
@@ -38,15 +40,10 @@ gulp.task("dev", [
   "styles", "js"
 ])
 
-// deploy
-// gulp.task("deploy", [
-//   "styles", "js"
-// ])
-
 gulp.task("watch", ["dev"], function() {
   gulp.watch("js/**/*.js", ["js"])
   gulp.watch("css/**/*.css", ["styles"])
 })
 
 gulp.task("default", ["dev", "watch"])
-// gulp.task("prod", ["deploy", "watch"])
+gulp.task("prod", ["dev"]) // gulp prod --production
