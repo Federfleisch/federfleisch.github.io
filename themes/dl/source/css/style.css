@@ -14,28 +14,6 @@ body {
   font-family: 'Super Clarendon', 'Lucida Grande', 'Lucida Sans Unicode', Lucida, sans-serif;
 }
 
-  @media only screen and (min-width: 50em) {
-    body:before,
-    body:after {
-      content: "";
-      position: fixed;
-      background: #1B1E1F;
-      left: 0;
-      right: 0;
-      height: 1.25rem;
-    }
-    body:before {
-      top: 0;
-    }
-    body:after {
-      bottom: 0;
-    }
-    body {
-      border-left: 1.25rem solid #1B1E1F;
-      border-right: 1.25rem solid #1B1E1F;
-    }
-  }
-
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -124,6 +102,8 @@ img {
 :root {
   --UIWrapper-fontSize: 1rem;
   --UIWrapper-widthContent: 65%;
+  --Main-fontSize: 1rem;
+  --Main-borderColor: #1B1E1F;
 }
 
 
@@ -134,15 +114,55 @@ img {
 
   @media only screen and (min-width: 50em) {
     .dl-UIWrapper {
-      padding: 1.875rem;
-      /* align-items: center; */
       width: var(--UIWrapper-widthContent);
+    }
+
+    .dl-UIWrapper:after{
+      content: "";
+      position: fixed;
+      background: color(var(--Main-borderColor) a(20%));
+      right: 0;
+      width: 1.25rem;
+      height: 100%;
+    }
+
+    .dl-Aside:before{
+      content: "";
+      position: fixed;
+      background: var(--Main-borderColor);
+      left: 0;
+      width: 1.25rem;
+      height: 100%;
+    }
+
+    .dl-BorderHack:after,
+    .dl-BorderHack:before{
+      content: "";
+      position: fixed;
+      height: 1.25rem;
+    }
+
+    .dl-BorderHack--UIWrapper:before,
+    .dl-BorderHack--UIWrapper:after{
+      width: calc(65% - 1.25rem);
+      background-color: color(var(--Main-borderColor) a(20%))
+    }
+
+    .dl-BorderHack--Aside:before,
+    .dl-BorderHack--Aside:after{
+      width: 35%;
+      background-color: var(--Main-borderColor);
+    }
+
+    .dl-BorderHack:after{
+      top: 0;
+    }
+
+    .dl-BorderHack:before{
+      bottom: 0;
     }
   }
 
-:root {
-  --Main-fontSize: 1rem;
-}
 
 .dl-Main {
   flex: 1;
@@ -162,12 +182,6 @@ img {
   flex: 1;
 }
 
-  @media only screen and (min-width: 50em) {
-    .dl-Aside {
-      margin-top: 1.25rem;
-      margin-bottom: 1.25rem;
-    }
-  }
 
 .dl-Nav {
   list-style-type: none;
@@ -243,7 +257,7 @@ img {
 
 .dl-Nav-Item--active{
   color: #FFFFFF;
-  background-color: #1B1E1F;
+  background-color: var(--Main-borderColor);
   position: relative;
 }
 
