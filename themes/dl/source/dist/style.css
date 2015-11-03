@@ -962,8 +962,6 @@ img {
   opacity: 0;
   width: 0;
   position: absolute;
-  -webkit-transition:  opacity .15s ease-out;
-          transition:  opacity .15s ease-out;
 }
 
   @media only screen and (min-width: 50em) {

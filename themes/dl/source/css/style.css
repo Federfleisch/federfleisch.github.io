@@ -230,7 +230,6 @@ img {
   opacity: 0;
   width: 0;
   position: absolute;
-  transition:  opacity .15s ease-out;
 }
 
   @media only screen and (min-width: 50em) {
