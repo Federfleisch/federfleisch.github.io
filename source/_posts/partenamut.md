@@ -3,6 +3,8 @@ date: 2015-09-23 16:44:37
 categories:
 - web
 - professional
+
+maincolor: "#22B0FF"
 ---
 
 Partenamut provides several solutions to enable you to benefit from Belgian

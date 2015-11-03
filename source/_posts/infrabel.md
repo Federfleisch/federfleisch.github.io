@@ -3,6 +3,11 @@ date: 2015-10-02 14:10:58
 categories:
 - web
 - professional
+
+photos:
+- /images/infrabel.jpg
+
+maincolor: "#01BCF1"
 ---
 
 "The sound that will save you". This campaign website launched by Infrabel aims

@@ -3,6 +3,11 @@ date: 2015-10-02 13:47:21
 categories:
 - web
 - professional
+
+photos:
+- /images/wip.jpg
+
+maincolor: "#8A0D72"
 ---
 
 The Women in Parliaments Global Forum is an independent, international and

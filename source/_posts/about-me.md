@@ -19,8 +19,7 @@ tell how many times I have banged my head in metal gigs.
 Beyond that, I am also interested in many foreign languages, such as German or
 Japanese.
 
-Check out my resume for more details.
+Check out my [resume](/docs/DenisLefevre-CreativeDesigner-CV.pdf) for more details.
+
 
 —D
-
-Oh, and in case you wonder, I choose Salamander.

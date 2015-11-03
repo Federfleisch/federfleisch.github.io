@@ -5,9 +5,7 @@ categories:
 - Professional
 
 photos:
-- /images/amnesty/showcase-amnesty.png
-- /images/amnesty/showcase-amnesty-2.png
-- /images/amnesty/showcase-amnesty-3.png
+- /images/amnesty.jpg
 
 maincolor: "#FFFB01"
 ---
@@ -16,4 +14,4 @@ The guys from Amnesty International Belgium came to us because their previous we
 
 Playing with prior information layout and big wow effects, the design layout serves the strength of Amnesty International at his best.
 
-[See the website](http://www.amnesty-international.be)
+[See the website](http://www.amnesty.be)
