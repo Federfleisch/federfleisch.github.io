@@ -2,6 +2,7 @@ var dlWeb = (function() {
 
   var nav = document.getElementById('dl-Nav');
   var aside = document.getElementById('dl-Aside');
+  var header = document.getElementById('dl-Header')
   var asideFirstChild = aside.firstChild;
   var asideLastChild = aside.lastChild;
   var navItemActive = document.querySelector('.dl-Nav-Item--active');
@@ -34,7 +35,7 @@ var dlWeb = (function() {
   }
 
   function moveNavUp() {
-    aside.insertBefore(nav, asideFirstChild.nextSibling.nextSibling);
+    aside.insertBefore(nav, header.nextSibling);
   }
 
   function moveNavDown() {
