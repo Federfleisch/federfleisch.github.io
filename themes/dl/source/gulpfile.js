@@ -8,17 +8,17 @@ var gulp = require('gulp'),
     pngquant = require('imagemin-pngquant');
 
 
-gulp.task('styles', function() {
+gulp.task('styles', function () {
   gulp.src("css/style.css")
-  .pipe(cssnext())
-  .pipe(gulpif(argv.production, cssnext({compress: true})))
-  .pipe(gulp.dest("./dist/"));
+    .pipe(cssnext())
+    .pipe(gulpif(argv.production, cssnext({compress: true})))
+    .pipe(gulp.dest("./dist/"));
 });
 
 gulp.task('js', function () {
   gulp.src('js/site.js')
-  .pipe(gulpif(argv.production, uglify()))
-  .pipe(gulp.dest('./dist/'));
+    .pipe(gulpif(argv.production, uglify()))
+    .pipe(gulp.dest('./dist/'));
 });
 
 // gulp.task('img', function () {
@@ -36,14 +36,14 @@ gulp.task('js', function () {
 
 
 // build
-gulp.task("dev", [
+gulp.task("dist", [
   "styles", "js"
-])
+]);
 
-gulp.task("watch", ["dev"], function() {
-  gulp.watch("js/**/*.js", ["js"])
-  gulp.watch("css/**/*.css", ["styles"])
-})
+gulp.task("watch", ["dist"], function () {
+  gulp.watch("js/**/*.js", ["js"]);
+  gulp.watch("css/**/*.css", ["styles"]);
+});
 
-gulp.task("default", ["dev", "watch"])
-gulp.task("prod", ["dev"]) // gulp prod --production
+gulp.task("default", ["dist", "watch"]);
+gulp.task("prod", ["dist"]);
