@@ -230,8 +230,7 @@ img {
   opacity: 0;
   width: 0;
   position: absolute;
-  transform: scale(1.5);
-  transition:  opacity .15s, transform .3s ease-out;
+  transition:  opacity .15s ease-out;
 }
 
   @media only screen and (min-width: 50em) {
@@ -251,7 +250,6 @@ img {
   visibility: visible;
   opacity: 1;
   width: 100%;
-  transform: scale(1);
 }
 
 
