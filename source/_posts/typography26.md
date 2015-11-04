@@ -4,31 +4,13 @@ category:
 - print
 - personal
 photos:
-- /images/typography26/a.jpg
-- /images/typography26/b.jpg
-- /images/typography26/c.jpg
-- /images/typography26/d.jpg
-- /images/typography26/e.jpg
-- /images/typography26/f.jpg
-- /images/typography26/g.jpg
-- /images/typography26/h.jpg
-- /images/typography26/i.jpg
-- /images/typography26/j.jpg
-- /images/typography26/k.jpg
-- /images/typography26/l.jpg
-- /images/typography26/m.jpg
-- /images/typography26/n.jpg
-- /images/typography26/o.jpg
-- /images/typography26/p.jpg
-- /images/typography26/q.jpg
-- /images/typography26/r.jpg
-- /images/typography26/s.jpg
-- /images/typography26/t.jpg
-- /images/typography26/u.jpg
-- /images/typography26/v.jpg
-- /images/typography26/w.jpg
-- /images/typography26/x.jpg
-- /images/typography26/y.jpg
+- /images/typography.jpg
+- /images/typography2.jpg
+- /images/typography3.jpg
+- /images/typography4.jpg
+
+
+maincolor: "#1B1E1F"
 ---
 
 I've always wanted to start digging my mind and see what would come out from the love I have for typography.
