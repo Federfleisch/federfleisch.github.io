@@ -140,6 +140,7 @@ img {
       content: "";
       position: fixed;
       height: 1.25rem;
+      z-index: 1;
     }
 
     .dl-BorderHack--UIWrapper:before,
