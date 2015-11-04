@@ -5,6 +5,9 @@ categories:
 - professional
 
 maincolor: "#22B0FF"
+
+photos:
+- /images/partenamut.jpg
 ---
 
 Partenamut provides several solutions to enable you to benefit from Belgian
