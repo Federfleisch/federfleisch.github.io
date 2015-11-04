@@ -753,7 +753,7 @@ img {
   padding: 2rem;
 }
 
-  @media only screen and (min-width: 50em) {
+  @media only screen and (min-width: 80em) {
     .dl-Logo-Wrap {
       padding: 3.75rem;
     }
@@ -798,7 +798,7 @@ img {
   min-height: 100vh;
 }
 
-  @media only screen and (min-width: 50em) {
+  @media only screen and (min-width: 80em) {
     .dl-UIViewport {
       -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
@@ -817,9 +817,9 @@ img {
   width: 100%;
 }
 
-  @media only screen and (min-width: 50em) {
+  @media only screen and (min-width: 80em) {
     .dl-UIWrapper {
-      width: 67%;
+      width: 55%;
     }
 
     .dl-UIWrapper:after{
@@ -871,6 +871,11 @@ img {
     }
   }
 
+@media only screen and (min-width: 100em) {
+  .dl-UIWrapper {
+    width: 67%;
+  }
+}
 
 .dl-Main {
   -webkit-box-flex: 1;
@@ -881,7 +886,7 @@ img {
   font-size: 1rem;
 }
 
-  @media only screen and (min-width: 50em) {
+  @media only screen and (min-width: 80em) {
     .dl-Main {
       -webkit-box-flex: 0;
       -webkit-flex: 0 100%;
@@ -917,7 +922,7 @@ img {
   margin-bottom: 1.25rem;
 }
 
-  @media only screen and (min-width: 50em) {
+  @media only screen and (min-width: 80em) {
     .dl-Nav{
       padding-left: 4.75rem;
       padding-right: 3.75rem;
@@ -948,7 +953,7 @@ img {
   position: relative;
 }
 
-  @media only screen and (min-width: 50em) {
+  @media only screen and (min-width: 80em) {
     .dl-Nav-Item{
       padding-left: 0;
     }
@@ -967,7 +972,7 @@ img {
   position: absolute;
 }
 
-  @media only screen and (min-width: 50em) {
+  @media only screen and (min-width: 80em) {
     .dl-Nav-innerPages .dl-Nav-Item:not(.dl-Nav-Item--active){
       position: relative;
       visibility: visible;
@@ -1028,7 +1033,7 @@ img {
           transform: rotate(-40deg);
 }
 
-  @media only screen and (min-width: 50em) {
+  @media only screen and (min-width: 80em) {
     .dl-Nav-Item--active{
       /*padding-left: 1.875rem;*/
     }
@@ -1058,7 +1063,7 @@ img {
   padding-right: 1.25rem;
 }
 
-  @media only screen and (min-width: 50em) {
+  @media only screen and (min-width: 80em) {
     .dl-Container{
       padding-left: 4.75rem;
       padding-right: 4.75rem;
@@ -1111,7 +1116,7 @@ img {
     padding-bottom: 100px;
   }
 
-@media only screen and (min-width: 60em) {
+@media only screen and (min-width: 80em) {
 
   .dl-Article{
     margin-top: 7.5rem;
