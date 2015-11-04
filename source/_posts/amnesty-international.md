@@ -7,11 +7,11 @@ categories:
 photos:
 - /images/amnesty.jpg
 
-maincolor: "#FFFB01"
+maincolor: "#ffff00"
 ---
 
 The guys from Amnesty International Belgium came to us because their previous website needed a refreshing. After long talks and a lot of feedback, our teams came along with a plan to set up the new website.
 
 Playing with prior information layout and big wow effects, the design layout serves the strength of Amnesty International at his best.
 
-[See the website](http://www.amnesty.be)
+[— Visit the website](http://www.amnesty.be)
