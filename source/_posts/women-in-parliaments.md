@@ -7,7 +7,7 @@ categories:
 photos:
 - /images/wip.jpg
 
-maincolor: "#8A0D72"
+maincolor: "#a84191"
 ---
 
 The Women in Parliaments Global Forum is an independent, international and
