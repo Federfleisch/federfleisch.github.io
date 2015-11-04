@@ -730,14 +730,14 @@ h1, h2, h3, h4, h5, h6{
 
 
 a{
-  color: #FFFFFF;
+  color: #686F76;
   text-decoration: none;
   -webkit-transition: color .25s ease-out;
           transition: color .25s ease-out;
 }
 
 a:hover{
-  color: rgb(191, 146, 21);;
+  color: rgb(255, 255, 255);
 }
 
 img {
@@ -819,7 +819,7 @@ img {
 
   @media only screen and (min-width: 50em) {
     .dl-UIWrapper {
-      width: 65%;
+      width: 67%;
     }
 
     .dl-UIWrapper:after{
@@ -851,14 +851,14 @@ img {
 
     .dl-BorderHack--UIWrapper:before,
     .dl-BorderHack--UIWrapper:after{
-      width: calc(65% - 1.25rem);
+      width: calc(67% - 1.25rem);
       background-color: #1B1E1F;
       background-color: rgba(27, 30, 31, 0.2)
     }
 
     .dl-BorderHack--Aside:before,
     .dl-BorderHack--Aside:after{
-      width: 35%;
+      width: 33%;
       background-color: #1B1E1F;
     }
 
@@ -884,9 +884,10 @@ img {
   @media only screen and (min-width: 50em) {
     .dl-Main {
       -webkit-box-flex: 0;
-      -webkit-flex: 0 80%;
-          -ms-flex: 0 80%;
-              flex: 0 80%;
+      -webkit-flex: 0 100%;
+          -ms-flex: 0 100%;
+              flex: 0 100%;
+      text-align:center;
     }
   }
 
@@ -918,7 +919,8 @@ img {
 
   @media only screen and (min-width: 50em) {
     .dl-Nav{
-      padding-left: 3.75rem;
+      padding-left: 4.75rem;
+      padding-right: 3.75rem;
     }
   }
 
@@ -989,7 +991,7 @@ img {
 
 .dl-Nav-Item--active{
   color: #FFFFFF;
-  background-color: #1B1E1F;
+  /*background-color: var(--Main-borderColor);*/
   position: relative;
 }
 
@@ -1028,7 +1030,7 @@ img {
 
   @media only screen and (min-width: 50em) {
     .dl-Nav-Item--active{
-      padding-left: 1.875rem;
+      /*padding-left: 1.875rem;*/
     }
     .dl-Nav-Item--active:before,
     .dl-Nav-Item--active:after{
@@ -1058,8 +1060,8 @@ img {
 
   @media only screen and (min-width: 50em) {
     .dl-Container{
-      padding-left: 3.75rem;
-      padding-right: 1.875rem;
+      padding-left: 4.75rem;
+      padding-right: 4.75rem;
     }
   }
 
@@ -1104,6 +1106,10 @@ img {
     border-bottom: 0.0625rem solid #FFFFFF;
   }
 
+  .dl-Article-Images{
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
 
 @media only screen and (min-width: 60em) {
 
@@ -1115,15 +1121,17 @@ img {
   .dl-Article-Images{
     display: inline-block;
     vertical-align: top;
+    max-width:1000px;
   }
 
   .dl-Article-Description{
     margin-right: 1.5rem;
-    font-size: 1.75rem;
-    line-height:  2.375rem;
+    font-size: 1.5rem;
+    line-height:  2.25rem;
   }
 
   .dl-Article-Images{
     padding-top: 23.75rem;
+
   }
 }
