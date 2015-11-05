@@ -695,7 +695,6 @@ th {
   /* not rem so you can use .small in .small */
 }
 
-
 html {
   box-sizing: border-box;
 }
@@ -753,7 +752,7 @@ img {
   padding: 2rem;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (min-width: 80em) {
     .dl-Logo-Wrap {
       padding: 3.75rem;
     }
@@ -798,7 +797,7 @@ img {
   min-height: 100vh;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (min-width: 80em) {
     .dl-UIViewport {
       -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
@@ -817,7 +816,7 @@ img {
   width: 100%;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (min-width: 80em) {
     .dl-UIWrapper {
       width: 55%;
     }
@@ -851,7 +850,7 @@ img {
 
     .dl-BorderHack--UIWrapper:before,
     .dl-BorderHack--UIWrapper:after{
-      width: calc(67% - 1.25rem);
+      width: calc(55% - 1.25rem);
       background-color: #1B1E1F;
       background-color: rgba(27, 30, 31, 0.2)
     }
@@ -871,11 +870,11 @@ img {
     }
   }
 
-@media only screen and (min-width: 100em) {
-  .dl-UIWrapper {
-    width: 67%;
+  @media (min-width: 100em) {
+    .dl-UIWrapper {
+      width: 55%;
+    }
   }
-}
 
 .dl-Main {
   -webkit-box-flex: 1;
@@ -886,7 +885,7 @@ img {
   font-size: 1rem;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (min-width: 80em) {
     .dl-Main {
       -webkit-box-flex: 0;
       -webkit-flex: 0 100%;
@@ -922,7 +921,7 @@ img {
   margin-bottom: 1.25rem;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (min-width: 80em) {
     .dl-Nav{
       padding-left: 4.75rem;
       padding-right: 3.75rem;
@@ -953,7 +952,7 @@ img {
   position: relative;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (min-width: 80em) {
     .dl-Nav-Item{
       padding-left: 0;
     }
@@ -968,11 +967,10 @@ img {
 .dl-Nav-innerPages .dl-Nav-Item:not(.dl-Nav-Item--active){
   visibility: hidden;
   opacity: 0;
-  width: 0;
   position: absolute;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (min-width: 80em) {
     .dl-Nav-innerPages .dl-Nav-Item:not(.dl-Nav-Item--active){
       position: relative;
       visibility: visible;
@@ -981,7 +979,6 @@ img {
           -ms-transform: none;
               transform: none;
       padding-left: 0;
-      width: 100%;
     }
   }
 
@@ -990,7 +987,6 @@ img {
   position: relative;
   visibility: visible;
   opacity: 1;
-  width: 100%;
 }
 
 
@@ -1013,15 +1009,17 @@ img {
   height: 2px;
   height: 0.165rem;
   background-color: #686F76;
-  -webkit-transform: rotate(40deg);
-      -ms-transform: rotate(40deg);
-          transform: rotate(40deg);
+  -webkit-transition: all .25s ease-out;
+          transition: all .25s ease-out;
 }
 
 
 .dl-Nav-Item--active:before{
   right: 28px;
   right: 1.75rem;
+  -webkit-transform: rotate(40deg);
+      -ms-transform: rotate(40deg);
+          transform: rotate(40deg);
 }
 
 
@@ -1033,10 +1031,21 @@ img {
           transform: rotate(-40deg);
 }
 
-  @media only screen and (min-width: 80em) {
-    .dl-Nav-Item--active{
-      /*padding-left: 1.875rem;*/
-    }
+
+.dl-Nav--isOpen .dl-Nav-Item--active:before{
+  -webkit-transform: rotate(140deg);
+      -ms-transform: rotate(140deg);
+          transform: rotate(140deg);
+}
+
+
+.dl-Nav--isOpen .dl-Nav-Item--active:after{
+  -webkit-transform: rotate(-140deg);
+      -ms-transform: rotate(-140deg);
+          transform: rotate(-140deg);
+}
+
+  @media (min-width: 80em) {
     .dl-Nav-Item--active:before,
     .dl-Nav-Item--active:after{
       content: none;
@@ -1063,7 +1072,7 @@ img {
   padding-right: 1.25rem;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (min-width: 80em) {
     .dl-Container{
       padding-left: 4.75rem;
       padding-right: 4.75rem;
@@ -1116,7 +1125,7 @@ img {
     padding-bottom: 100px;
   }
 
-@media only screen and (min-width: 80em) {
+@media (min-width: 80em) {
 
   .dl-Article{
     margin-top: 7.5rem;
@@ -1137,6 +1146,5 @@ img {
 
   .dl-Article-Images{
     padding-top: 23.75rem;
-
   }
 }

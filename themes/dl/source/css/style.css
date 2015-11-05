@@ -4,6 +4,9 @@
 @import "cssrecipes-vertical-rhythm/lib/ratio/minor-third.css";
 
 
+@custom-media --md-screen (min-width: 80em);
+@custom-media --lg-screen (min-width: 100em);
+
 html {
   box-sizing: border-box;
 }
@@ -59,7 +62,7 @@ img {
   padding: 2rem;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (--md-screen) {
     .dl-Logo-Wrap {
       padding: 3.75rem;
     }
@@ -92,7 +95,7 @@ img {
   min-height: 100vh;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (--md-screen) {
     .dl-UIViewport {
       flex-direction: row;
     }
@@ -102,6 +105,7 @@ img {
 :root {
   --UIWrapper-fontSize: 1rem;
   --UIWrapper-widthContent: 55%;
+  --UIWrapper-widthContent-md: 67%;
   --Main-fontSize: 1rem;
   --Main-borderColor: #1B1E1F;
 }
@@ -112,7 +116,7 @@ img {
   width: 100%;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (--md-screen) {
     .dl-UIWrapper {
       width: var(--UIWrapper-widthContent);
     }
@@ -145,7 +149,7 @@ img {
 
     .dl-BorderHack--UIWrapper:before,
     .dl-BorderHack--UIWrapper:after{
-      width: calc(67% - 1.25rem);
+      width: calc(var(--UIWrapper-widthContent) - 1.25rem);
       background-color: color(var(--Main-borderColor) a(20%))
     }
 
@@ -164,18 +168,18 @@ img {
     }
   }
 
-@media only screen and (min-width: 100em) {
-  .dl-UIWrapper {
-    width: 67%;
+  @media (--lg-screen) {
+    .dl-UIWrapper {
+      width: var(--UIWrapper-widthContent);
+    }
   }
-}
 
 .dl-Main {
   flex: 1;
   font-size: var(--Main-fontSize);
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (--md-screen) {
     .dl-Main {
       flex: 0 100%;
       text-align:center;
@@ -196,7 +200,7 @@ img {
   margin-bottom: 1.25rem;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (--md-screen) {
     .dl-Nav{
       padding-left: 4.75rem;
       padding-right: 3.75rem;
@@ -221,7 +225,7 @@ img {
   position: relative;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (--md-screen) {
     .dl-Nav-Item{
       padding-left: 0;
     }
@@ -236,18 +240,16 @@ img {
 .dl-Nav-innerPages .dl-Nav-Item:not(.dl-Nav-Item--active){
   visibility: hidden;
   opacity: 0;
-  width: 0;
   position: absolute;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (--md-screen) {
     .dl-Nav-innerPages .dl-Nav-Item:not(.dl-Nav-Item--active){
       position: relative;
       visibility: visible;
       opacity: 1;
       transform: none;
       padding-left: 0;
-      width: 100%;
     }
   }
 
@@ -256,7 +258,6 @@ img {
   position: relative;
   visibility: visible;
   opacity: 1;
-  width: 100%;
 }
 
 
@@ -276,12 +277,13 @@ img {
   width: 0.625rem;
   height: 0.165rem;
   background-color: #686F76;
-  transform: rotate(40deg);
+  transition: all .25s ease-out;
 }
 
 
 .dl-Nav-Item--active:before{
   right: 1.75rem;
+  transform: rotate(40deg);
 }
 
 
@@ -290,10 +292,17 @@ img {
   transform: rotate(-40deg);
 }
 
-  @media only screen and (min-width: 80em) {
-    .dl-Nav-Item--active{
-      /*padding-left: 1.875rem;*/
-    }
+
+.dl-Nav--isOpen .dl-Nav-Item--active:before{
+  transform: rotate(140deg);
+}
+
+
+.dl-Nav--isOpen .dl-Nav-Item--active:after{
+  transform: rotate(-140deg);
+}
+
+  @media (--md-screen) {
     .dl-Nav-Item--active:before,
     .dl-Nav-Item--active:after{
       content: none;
@@ -318,7 +327,7 @@ img {
   padding-right: 1.25rem;
 }
 
-  @media only screen and (min-width: 80em) {
+  @media (--md-screen) {
     .dl-Container{
       padding-left: 4.75rem;
       padding-right: 4.75rem;
@@ -365,7 +374,7 @@ img {
     padding-bottom: 100px;
   }
 
-@media only screen and (min-width: 80em) {
+@media (--md-screen) {
 
   .dl-Article{
     margin-top: calc(1.25rem * 6);
@@ -386,6 +395,5 @@ img {
 
   .dl-Article-Images{
     padding-top: 23.75rem;
-
   }
 }
