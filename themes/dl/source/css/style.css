@@ -155,7 +155,7 @@ img {
 
     .dl-BorderHack--Aside:before,
     .dl-BorderHack--Aside:after{
-      width: 33%;
+      width: calc(100% - var(--UIWrapper-widthContent));
       background-color: var(--Main-borderColor);
     }
 
