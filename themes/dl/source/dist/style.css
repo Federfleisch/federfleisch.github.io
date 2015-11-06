@@ -694,6 +694,31 @@ th {
 
   /* not rem so you can use .small in .small */
 }
+.flex-video {
+  position: relative;
+  padding-top: 25px;
+  padding-bottom: 67.5%;
+  height: 0;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.flex-video.widescreen {
+  padding-bottom: 57.25%;
+}
+.flex-video.vimeo {
+  padding-top: 0;
+}
+.flex-video iframe,
+.flex-video object,
+.flex-video embed,
+.flex-video video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
 html {
   box-sizing: border-box;
@@ -752,7 +777,7 @@ img {
   padding: 2rem;
 }
 
-  @media (min-width: 80em) {
+  @media (min-width: 64em) {
     .dl-Logo-Wrap {
       padding: 3.75rem;
     }
@@ -797,7 +822,7 @@ img {
   min-height: 100vh;
 }
 
-  @media (min-width: 80em) {
+  @media (min-width: 64em) {
     .dl-UIViewport {
       -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
@@ -816,7 +841,7 @@ img {
   width: 100%;
 }
 
-  @media (min-width: 80em) {
+  @media (min-width: 64em) {
     .dl-UIWrapper {
       width: 55%;
     }
@@ -850,7 +875,7 @@ img {
 
     .dl-BorderHack--UIWrapper:before,
     .dl-BorderHack--UIWrapper:after{
-      width: calc(55% - 1.25rem);
+      width: calc(67% - 1.25rem);
       background-color: #1B1E1F;
       background-color: rgba(27, 30, 31, 0.2)
     }
@@ -872,7 +897,7 @@ img {
 
   @media (min-width: 100em) {
     .dl-UIWrapper {
-      width: 55%;
+      width: 67%;
     }
   }
 
@@ -885,7 +910,7 @@ img {
   font-size: 1rem;
 }
 
-  @media (min-width: 80em) {
+  @media (min-width: 64em) {
     .dl-Main {
       -webkit-box-flex: 0;
       -webkit-flex: 0 100%;
@@ -906,11 +931,16 @@ img {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
 }
+
+  @media (min-width: 64em) {
+    .dl-Aside {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+    }
+  }
 
 
 .dl-Nav {
@@ -921,7 +951,7 @@ img {
   margin-bottom: 1.25rem;
 }
 
-  @media (min-width: 80em) {
+  @media (min-width: 64em) {
     .dl-Nav{
       padding-left: 4.75rem;
       padding-right: 3.75rem;
@@ -952,7 +982,7 @@ img {
   position: relative;
 }
 
-  @media (min-width: 80em) {
+  @media (min-width: 64em) {
     .dl-Nav-Item{
       padding-left: 0;
     }
@@ -970,7 +1000,7 @@ img {
   position: absolute;
 }
 
-  @media (min-width: 80em) {
+  @media (min-width: 64em) {
     .dl-Nav-innerPages .dl-Nav-Item:not(.dl-Nav-Item--active){
       position: relative;
       visibility: visible;
@@ -1045,7 +1075,7 @@ img {
           transform: rotate(-140deg);
 }
 
-  @media (min-width: 80em) {
+  @media (min-width: 64em) {
     .dl-Nav-Item--active:before,
     .dl-Nav-Item--active:after{
       content: none;
@@ -1072,7 +1102,7 @@ img {
   padding-right: 1.25rem;
 }
 
-  @media (min-width: 80em) {
+  @media (min-width: 64em) {
     .dl-Container{
       padding-left: 4.75rem;
       padding-right: 4.75rem;
@@ -1125,7 +1155,7 @@ img {
     padding-bottom: 100px;
   }
 
-@media (min-width: 80em) {
+@media (min-width: 64em) {
 
   .dl-Article{
     margin-top: 7.5rem;
@@ -1140,11 +1170,18 @@ img {
 
   .dl-Article-Description{
     margin-right: 1.5rem;
-    font-size: 1.5rem;
-    line-height:  2.25rem;
+    font-size: 1.15rem;
+    line-height:  1.725rem;
   }
 
   .dl-Article-Images{
     padding-top: 23.75rem;
+  }
+}
+
+@media (min-width: 100em) {
+  .dl-Article-Description{
+    font-size: 1.5rem;
+    line-height:  2.25rem;
   }
 }

@@ -2,9 +2,9 @@
 @import "fonts";
 @import "cssrecipes-vertical-rhythm/index.css";
 @import "cssrecipes-vertical-rhythm/lib/ratio/minor-third.css";
+@import "flex-video.css";
 
-
-@custom-media --md-screen (min-width: 80em);
+@custom-media --md-screen (min-width: 64em);
 @custom-media --lg-screen (min-width: 100em);
 
 html {
@@ -105,7 +105,7 @@ img {
 :root {
   --UIWrapper-fontSize: 1rem;
   --UIWrapper-widthContent: 55%;
-  --UIWrapper-widthContent-md: 67%;
+  --UIWrapper-widthContent-lg: 67%;
   --Main-fontSize: 1rem;
   --Main-borderColor: #1B1E1F;
 }
@@ -149,7 +149,7 @@ img {
 
     .dl-BorderHack--UIWrapper:before,
     .dl-BorderHack--UIWrapper:after{
-      width: calc(var(--UIWrapper-widthContent) - 1.25rem);
+      width: calc(var(--UIWrapper-widthContent-lg) - 1.25rem);
       background-color: color(var(--Main-borderColor) a(20%))
     }
 
@@ -170,7 +170,7 @@ img {
 
   @media (--lg-screen) {
     .dl-UIWrapper {
-      width: var(--UIWrapper-widthContent);
+      width: var(--UIWrapper-widthContent-lg);
     }
   }
 
@@ -190,8 +190,13 @@ img {
 .dl-Aside {
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
+
+  @media (--md-screen) {
+    .dl-Aside {
+      flex: 1;
+    }
+  }
 
 
 .dl-Nav {
@@ -389,11 +394,18 @@ img {
 
   .dl-Article-Description{
     margin-right: 1.5rem;
-    font-size: 1.5rem;
-    line-height:  2.25rem;
+    font-size: 1.15rem;
+    line-height:  1.725rem;
   }
 
   .dl-Article-Images{
     padding-top: 23.75rem;
+  }
+}
+
+@media (--lg-screen) {
+  .dl-Article-Description{
+    font-size: 1.5rem;
+    line-height:  2.25rem;
   }
 }
