@@ -1,5 +1,5 @@
 title: A new identity
-date: 2015-09-21 10:04:43
+date: 2015-10-6 23:59:00
 categories:
 - Branding
 - Personal

@@ -1,5 +1,5 @@
 title: Typography 26
-date: 2015-09-15 12:16:05
+date: 2015-10-6 23:54:00
 category:
 - print
 - personal
