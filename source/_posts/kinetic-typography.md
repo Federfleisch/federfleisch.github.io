@@ -1,7 +1,7 @@
 title: Kinetic Typography
 date: 2015-09-21 10:04:43
 categories:
-- Print
+- Motion
 - Personal
 
 

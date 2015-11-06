@@ -3,6 +3,7 @@ date: 2015-09-15 12:16:05
 category:
 - print
 - personal
+
 photos:
 - /images/typography.jpg
 - /images/typography2.jpg
