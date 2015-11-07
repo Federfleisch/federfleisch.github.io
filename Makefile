@@ -3,7 +3,7 @@ init:
 	@ sudo npm install
 	@ echo "❯ Installing node_modules for DL theme..."
 	@ npm install -g gulp
-	@ cd themes/dl/source && sudo npm install
+	@ cd themes/dl/assets && sudo npm install
 
 serve:
 	@ echo "❯ Initializing server..."
@@ -11,14 +11,18 @@ serve:
 
 watch:
 	@ echo "❯ Watching..."
-	@ cd themes/dl/source && gulp
+	@ cd themes/dl/assets && gulp
+
+clean:
+	@ echo "❯ Cleaning..."
+	@ hexo clean
 
 gen:
+	@ echo "❯ Minifying assets..."
+	@ cd themes/dl/assets && gulp prod --production && cd ../../../
 	@ echo "❯ Generating..."
 	@ hexo generate
 
 deploy:
-	@ echo "❯ Minifying CSS and JS assets..."
-	@ cd themes/dl/source && gulp prod --production && cd ../../../
 	@ echo "❯ Deploying to denislefevre.com..."
 	@ hexo deploy
