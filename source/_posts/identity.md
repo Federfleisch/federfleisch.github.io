@@ -1,8 +1,8 @@
 title: A new identity
 date: 2015-10-6 23:59:00
 categories:
-- Branding
-- Personal
+- branding
+- personal
 
 photos:
 - /images/branding1.jpg
@@ -11,4 +11,4 @@ photos:
 maincolor: "#1B1E1F"
 ---
 
-After being around for 2 years, it just felt a brand new identity should come up, starting with a fresh new logo. The whole package is meant to represent what I love: dark, bold, calligraphic, subtil ambiance. 
+After being around for 2 years, it just felt a brand new identity should come up, starting with a fresh new logo. The whole package is meant to represent what I love: dark, bold, calligraphic, subtil ambiance.
