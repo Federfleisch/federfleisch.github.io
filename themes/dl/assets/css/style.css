@@ -57,6 +57,12 @@ img {
 }
 
 
+::selection {
+  color: var(--Main-borderColor);
+  background-color: #FFC31C;
+}
+
+
 .dl-Logo-Wrap {
   background-color: #101213;
   padding: 2rem;
@@ -273,7 +279,6 @@ img {
 
 .dl-Nav-Item--active{
   color: #FFFFFF;
-  /*background-color: var(--Main-borderColor);*/
   position: relative;
 }
 
@@ -407,5 +412,3 @@ img {
     line-height:  2.25rem;
   }
 }
-
-

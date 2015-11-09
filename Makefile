@@ -26,3 +26,4 @@ gen:
 deploy:
 	@ echo "❯ Deploying to denislefevre.com..."
 	@ hexo deploy
+	@ git checkout themes/dl/source/dist/*
