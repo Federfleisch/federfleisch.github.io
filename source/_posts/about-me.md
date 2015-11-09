@@ -19,7 +19,8 @@ tell how many times I have banged my head in metal gigs.
 Beyond that, I am also interested in many foreign languages, such as German or
 Japanese.
 
-— Check out my [resume](/docs/DenisLefevre-CreativeDesigner-CV.pdf) for more details.
+Check out [my resume](/docs/DenisLefevre-CreativeDesigner-CV.pdf) for more details.
 
+Follow me on [LinkedIn](https://be.linkedin.com/in/denislefevre), [Twitter](https://twitter.com/Denisslef), and [Behance](https://www.behance.net/denislefevre).
 
-D
+— D
