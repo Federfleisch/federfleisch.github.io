@@ -771,6 +771,18 @@ img {
 }
 
 
+::-moz-selection {
+  color: #1B1E1F;
+  background-color: #FFC31C;
+}
+
+
+::selection {
+  color: #1B1E1F;
+  background-color: #FFC31C;
+}
+
+
 .dl-Logo-Wrap {
   background-color: #101213;
   padding: 32px;

@@ -57,6 +57,12 @@ img {
 }
 
 
+::selection {
+  color: var(--Main-borderColor);
+  background-color: #FFC31C;
+}
+
+
 .dl-Logo-Wrap {
   background-color: #101213;
   padding: 2rem;
