@@ -1027,7 +1027,6 @@ img {
 
 .dl-Nav-Item--active{
   color: #FFFFFF;
-  /*background-color: var(--Main-borderColor);*/
   position: relative;
 }
 
@@ -1183,5 +1182,3 @@ img {
     line-height:  2.25rem;
   }
 }
-
-

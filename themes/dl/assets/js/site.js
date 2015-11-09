@@ -13,12 +13,12 @@ var dlWeb = (function() {
     if (isRoot) {
       return;
     }
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 1024) {
       moveNavUp();
       moveNavItemActive();
       openNavOnClickActiveItem();
     }
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 1024) {
       moveNavDown();
     }
   }
