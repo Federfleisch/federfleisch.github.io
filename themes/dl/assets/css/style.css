@@ -344,16 +344,10 @@ img {
     }
   }
 
-
 .dl-Article-Title{
   font-size: 1.5rem;
   line-height: 36px;
   margin-bottom: 1.25rem;
-}
-
-.dl-Article-type-index p{
-  font-size: 1.7rem !important;
-  line-height: 2.55rem;
 }
 
 .dl-Article-Category{
