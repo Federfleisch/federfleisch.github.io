@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5, h6{
 
 
 a{
-  color: #686F76;
+  color: #FFFFFF;
   text-decoration: none;
   transition: color .25s ease-out;
 }
@@ -351,11 +351,10 @@ img {
   margin-bottom: 1.25rem;
 }
 
-
-.dl-Article-highlight{
-  color: #FFFFFF;
+.dl-Article-type-index p{
+  font-size: 1.7rem !important;
+  line-height: 2.55rem;
 }
-
 
 .dl-Article-Category{
   position: relative;
@@ -414,3 +413,5 @@ img {
     line-height:  2.25rem;
   }
 }
+
+
