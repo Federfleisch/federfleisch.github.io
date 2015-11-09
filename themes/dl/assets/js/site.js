@@ -9,26 +9,29 @@ var dlWeb = (function() {
   var navFirstChild = nav.firstChild;
   var isRoot = location.pathname === "/";
 
+  navItemActive.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (width !== "narrow") {
+      return
+    }
+    nav.classList.toggle('dl-Nav--isOpen');
+  });
+
   function onResizeOrLoad() {
     if (isRoot) {
       return;
     }
     if (window.innerWidth < 1024) {
+      width = "narrow";
       moveNavUp();
       moveNavItemActive();
-      openNavOnClickActiveItem();
     }
     if (window.innerWidth > 1024) {
+      width = "wide";
       moveNavDown();
     }
   }
-
-  function openNavOnClickActiveItem() {
-    navItemActive.addEventListener('click', function(e) {
-      e.preventDefault();
-      nav.classList.toggle('dl-Nav--isOpen');
-    });
-  }
+  var onResizeOrLoadDebounced = debounce(onResizeOrLoad)
 
   function moveNavItemActive() {
     nav.insertBefore(navItemActive, navFirstChild);
@@ -42,11 +45,26 @@ var dlWeb = (function() {
     aside.insertBefore(nav, asideLastChild);
   }
 
+  // https://davidwalsh.name/javascript-debounce-function
+  function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      }
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    }
+  }
 
   return {
     setup: function setup() {
-      window.addEventListener("load", onResizeOrLoad);
-      window.addEventListener("resize", onResizeOrLoad);
+      window.addEventListener("load", onResizeOrLoadDebounced);
+      window.addEventListener("resize", onResizeOrLoadDebounced);
     }
   }
 })();
