@@ -54,9 +54,9 @@ marked:
   smartypants: true
 
 # Category & Tag
-default_category: uncategorized
-category_map:
-tag_map:
+# default_category: uncategorized
+# category_map:
+# tag_map:
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
