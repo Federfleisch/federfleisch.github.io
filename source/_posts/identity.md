@@ -8,7 +8,7 @@ photos:
 - /images/branding1.jpg
 - /images/branding2.jpg
 
-maincolor: "#1D1D1E"
+maincolor: "#1B1E1F"
 ---
 
 After being around for 2 years, it just felt a brand new identity should come up, starting with a fresh new logo. The whole package is meant to represent what I love: dark, bold, calligraphic, subtil ambiance.
