@@ -155,7 +155,7 @@ img {
 
     .dl-BorderHack--Aside:before,
     .dl-BorderHack--Aside:after{
-      width: 33%;
+      width: calc(100% - var(--UIWrapper-widthContent));
       background-color: var(--Main-borderColor);
     }
 
@@ -171,6 +171,11 @@ img {
   @media (--lg-screen) {
     .dl-UIWrapper {
       width: var(--UIWrapper-widthContent-lg);
+    }
+
+    .dl-BorderHack--Aside:before,
+    .dl-BorderHack--Aside:after{
+      width: calc(100% - var(--UIWrapper-widthContent-lg));
     }
   }
 

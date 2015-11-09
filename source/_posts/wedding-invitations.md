@@ -1,8 +1,8 @@
 title: Wedding invitations
 date: 2015-10-6 23:57:00
 categories:
-- Print
-- Personal
+- print
+- personal
 
 photos:
 - /images/wedding.jpg
