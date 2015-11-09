@@ -11,4 +11,4 @@ photos:
 maincolor: "#1D1D1E"
 ---
 
-After being around for 2 years, it just felt a brand new identity should come up, starting with a fresh new logo. The whole package is meant to represent what I love: dark, bold, calligraphic, subtil ambiance.
+After being around for 2 years, I just felt a brand new identity should come up, starting with a fresh new logo. The whole package is meant to represent what I love: dark, bold, calligraphic, subtil ambiance.
