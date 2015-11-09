@@ -172,6 +172,11 @@ img {
     .dl-UIWrapper {
       width: var(--UIWrapper-widthContent-lg);
     }
+
+    .dl-BorderHack--Aside:before,
+    .dl-BorderHack--Aside:after{
+      width: calc(100% - var(--UIWrapper-widthContent-lg));
+    }
   }
 
 .dl-Main {

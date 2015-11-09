@@ -899,6 +899,11 @@ img {
     .dl-UIWrapper {
       width: 67%;
     }
+
+    .dl-BorderHack--Aside:before,
+    .dl-BorderHack--Aside:after{
+      width: 33%;
+    }
   }
 
 .dl-Main {
