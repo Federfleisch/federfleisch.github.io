@@ -1,7 +1,7 @@
 title: Women in Parliaments
 date: 2015-10-6 23:52:00
 categories:
-- web
+- web, print
 - professional
 
 photos:
