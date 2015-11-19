@@ -402,7 +402,7 @@ img {
   }
 
   .dl-Article-Images{
-    padding-top: 23.75rem;
+    padding-top: 13.75rem;
   }
 }
 
@@ -410,5 +410,9 @@ img {
   .dl-Article-Description{
     font-size: 1.5rem;
     line-height:  2.25rem;
+  }
+
+  .dl-Article-Images{
+    padding-top: 23.75rem;
   }
 }
