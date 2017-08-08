@@ -9,4 +9,4 @@ photos:
 maincolor: "#23BAED"
 ---
 
-Nage & Zen's brand new website had to be fresh and most certainly... blue. Alongside with the client we defined some light and clear content meant to be easy to read, among beautiful pictures.
+Nage & Zen's brand new website had to be fresh and most certainly... blue. Because they sell swimming pools. Alongside with the client we defined how content should look to be as legible as possible. I went for light and clear design and beautiful pictures with slinky depth effects.
