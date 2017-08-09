@@ -1,5 +1,5 @@
 title: Amnesty International
-date: 2015-10-6 23:58:00
+date: 2020-10-6 23:58:00
 categories:
 - web
 - professional
