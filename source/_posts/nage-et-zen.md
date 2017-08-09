@@ -1,4 +1,4 @@
-title: nage-et-zen
+title: Nage & Zen
 date: 2017-08-08 13:03:45
 categories:
 - Professional
