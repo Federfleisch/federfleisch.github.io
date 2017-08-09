@@ -4,7 +4,7 @@ categories:
 - Professional
 
 photos:
-- /images/ipw.jpg
+- /images/mkb.jpg
 
 maincolor: "#273A99"
 ---
