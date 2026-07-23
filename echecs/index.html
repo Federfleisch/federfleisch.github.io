@@ -500,8 +500,8 @@
      ⚠️ CONFIGURATION SUPABASE — à remplacer une seule fois
      Project Settings → API dans votre projet Supabase
      ========================================================== */
-  const SUPABASE_URL = "REMPLACER_PAR_VOTRE_URL_SUPABASE";
-  const SUPABASE_ANON_KEY = "REMPLACER_PAR_VOTRE_CLE_ANON_SUPABASE";
+  const SUPABASE_URL = "https://gbixgtxehqsuegcwkqxz.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_xxKGtzuznTgl7Go1A3hssA_9Alsv3ut";
 
   const sbReady = SUPABASE_URL.startsWith("http") && SUPABASE_ANON_KEY.length > 20;
   const sb = sbReady ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
