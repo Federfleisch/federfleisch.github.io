@@ -209,8 +209,12 @@
     border-radius:3px;
     cursor:pointer;
     transition:border-color .2s, color .2s;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
   }
   button.nav-btn:hover{border-color:var(--brass-dim);color:var(--brass);}
+  .btn-icon{width:13px;height:13px;flex:none;}
   button.master-btn{
     font-family:'IBM Plex Mono',monospace;
     font-size:12px;
@@ -227,6 +231,20 @@
     border-color:var(--sage);
     color:var(--sage);
   }
+  .key-hint{opacity:.6;margin-left:3px;}
+
+  /* --- Mini échiquier (flashcards) --- */
+  .mini-board{
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    width:104px;
+    margin-bottom:16px;
+    border:1px solid var(--line);
+  }
+  .mini-sq{aspect-ratio:1;}
+  .mini-sq.light{background:#3c352a;}
+  .mini-sq.dark{background:#241f19;}
+  .mini-sq.hl{background:rgba(176,141,87,0.55);box-shadow:inset 0 0 0 2px var(--brass);}
 
   /* --- Journal de parties --- */
   .game-form{
@@ -424,8 +442,9 @@
       <div class="card" id="card">
         <div class="face front">
           <div class="tag" id="tag-front">—</div>
+          <div class="mini-board" id="mini-board" style="display:none;"></div>
           <div class="q-text" id="q-text">—</div>
-          <div class="flip-hint">Touche la carte pour voir la réponse ↻</div>
+          <div class="flip-hint">Touche la carte ou appuie sur Espace pour voir la réponse ↻</div>
         </div>
         <div class="face back">
           <div class="tag" id="tag-back">—</div>
@@ -437,10 +456,10 @@
 
     <div class="fc-controls">
       <div class="fc-nav">
-        <button class="nav-btn" id="prev-btn">← Précédente</button>
-        <button class="nav-btn" id="next-btn">Suivante →</button>
+        <button class="nav-btn" id="prev-btn"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Précédente</button>
+        <button class="nav-btn" id="next-btn">Suivante<svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
       </div>
-      <button class="master-btn" id="master-btn">Marquer maîtrisée</button>
+      <button class="master-btn" id="master-btn">Marquer comme maîtrisée <span class="key-hint">↵</span></button>
     </div>
 
   </div>
@@ -504,11 +523,21 @@
   const SUPABASE_ANON_KEY = "sb_publishable_xxKGtzuznTgl7Go1A3hssA_9Alsv3ut";
 
   const sbReady = SUPABASE_URL.startsWith("http") && SUPABASE_ANON_KEY.length > 20;
-  const sb = sbReady ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+  let sb = null;
+  if(sbReady){
+    try{
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }catch(e){
+      sb = null;
+    }
+  }
 
   const banner = document.getElementById('sync-banner');
   if(!sbReady){
     banner.textContent = "⚠ Supabase non configuré : la sauvegarde et le journal de parties ne fonctionneront pas tant que SUPABASE_URL et SUPABASE_ANON_KEY ne sont pas renseignés dans le code.";
+    banner.classList.add('show','err');
+  } else if(!sb){
+    banner.textContent = "⚠ Connexion à la base de données indisponible pour l'instant (réseau ?). Le carnet reste consultable, mais rien ne sera sauvegardé tant que la connexion n'est pas rétablie — rechargez la page.";
     banner.classList.add('show','err');
   }
 
@@ -542,7 +571,8 @@
       tag: "Sécurité des pièces",
       q: "Ton fou recule loin en territoire adverse (ex : a5, b6). Que dois-tu vérifier avant de jouer ce coup ?",
       a: "Qu'il ait une case de repli si l'adversaire pousse un pion dessus. Sinon la pièce peut se retrouver piégée sans échange.",
-      source: "Fou emprisonné et perdu gratuitement sur b6."
+      source: "Fou emprisonné et perdu gratuitement sur b6.",
+      square: "b6"
     },
     {
       tag: "Colonnes ouvertes",
@@ -554,7 +584,8 @@
       tag: "Pions périphériques",
       q: "Tu viens de roquer, ou une tour vient de quitter la colonne h (ou a). À quoi ce pion devient-il exposé ?",
       a: "Une fois la tour partie, ce pion n'est souvent plus défendu que par le vide. Vérifie systématiquement qui protège encore ton pion h7/a7 (ou h2/a2) après chaque coup qui éloigne une pièce de ce coin.",
-      source: "Pion h7 croqué gratuitement par la dame adverse juste après le déplacement de la tour h8 vers e8."
+      source: "Pion h7 croqué gratuitement par la dame adverse juste après le déplacement de la tour h8 vers e8.",
+      square: "h7"
     }
   ];
 
@@ -585,6 +616,26 @@
     document.getElementById('fc-mastered-count').textContent = count + ' / ' + cards.length + ' maîtrisées';
   }
 
+  function squareToRowCol(square){
+    const file = square.charCodeAt(0) - 97; // a=0 ... h=7
+    const rank = parseInt(square[1], 10);
+    return { row: 8 - rank, col: file };
+  }
+
+  function renderMiniBoard(square, container){
+    container.innerHTML = '';
+    const target = squareToRowCol(square);
+    for(let r=0;r<8;r++){
+      for(let c2=0;c2<8;c2++){
+        const sq = document.createElement('div');
+        const isLight = (r + c2) % 2 === 0;
+        const isHl = r === target.row && c2 === target.col;
+        sq.className = 'mini-sq ' + (isLight ? 'light' : 'dark') + (isHl ? ' hl' : '');
+        container.appendChild(sq);
+      }
+    }
+  }
+
   function renderCard(){
     const c = cards[idx];
     document.getElementById('tag-front').textContent = c.tag;
@@ -597,10 +648,18 @@
     flipped = false;
     cardEl.classList.remove('flipped');
 
+    const miniBoard = document.getElementById('mini-board');
+    if(c.square){
+      miniBoard.style.display = 'grid';
+      renderMiniBoard(c.square, miniBoard);
+    } else {
+      miniBoard.style.display = 'none';
+    }
+
     const mastered = isMastered(idx);
     const btn = document.getElementById('master-btn');
     btn.classList.toggle('on', mastered);
-    btn.textContent = mastered ? '✓ Maîtrisée' : 'Marquer maîtrisée';
+    btn.innerHTML = mastered ? '✓ Maîtrisée' : 'Marquer comme maîtrisée <span class="key-hint">↵</span>';
     renderMasteredCount();
   }
 
@@ -621,6 +680,32 @@
     e.stopPropagation();
     await setMastered(idx, !isMastered(idx));
     renderCard();
+  });
+
+  /* Raccourcis clavier — actifs uniquement sur l'onglet Flashcards */
+  document.addEventListener('keydown', async (e) => {
+    const fcActive = document.getElementById('panel-fc').classList.contains('active');
+    if(!fcActive) return;
+    const tag = (e.target.tagName || '').toLowerCase();
+    if(tag === 'input' || tag === 'textarea' || tag === 'select') return;
+
+    if(e.key === 'ArrowLeft'){
+      e.preventDefault();
+      idx = (idx - 1 + cards.length) % cards.length;
+      renderCard();
+    } else if(e.key === 'ArrowRight'){
+      e.preventDefault();
+      idx = (idx + 1) % cards.length;
+      renderCard();
+    } else if(e.code === 'Space' || e.key === ' '){
+      e.preventDefault();
+      flipped = !flipped;
+      cardEl.classList.toggle('flipped', flipped);
+    } else if(e.key === 'Enter'){
+      e.preventDefault();
+      await setMastered(idx, !isMastered(idx));
+      renderCard();
+    }
   });
 
   /* ==========================================================
