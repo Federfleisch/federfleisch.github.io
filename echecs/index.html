@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carnet de progression — Échecs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.13.4/chess.min.js"></script>
+<style>
+  :root{
+    --bg:#1b1712;
+    --bg-elevated:#241f19;
+    --bg-card:#2a241d;
+    --ivory:#ece4d3;
+    --muted:#9a8f7c;
+    --brass:#b08d57;
+    --brass-dim:#7d6640;
+    --burgundy:#a24a4a;
+    --sage:#7a9a72;
+    --line:#3a332a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ivory);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:32px 20px 0;}
+
+  header{padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:32px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    color:var(--brass);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(28px,6vw,40px);
+    line-height:1.1;
+    margin:0 0 10px;
+    color:var(--ivory);
+  }
+  .sub{color:var(--muted);font-size:15px;line-height:1.5;max-width:52ch;}
+
+  .tabs{display:flex;gap:6px;margin-bottom:28px;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+  .tab{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:0.03em;
+    background:none;
+    border:none;
+    color:var(--muted);
+    padding:10px 4px 12px;
+    margin-right:22px;
+    cursor:pointer;
+    border-bottom:2px solid transparent;
+    transition:color .2s, border-color .2s;
+  }
+  .tab.active{color:var(--brass);border-color:var(--brass);}
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .3s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+  /* --- Bandeau de statut Supabase --- */
+  .sync-banner{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    padding:10px 14px;
+    border-radius:3px;
+    margin-bottom:22px;
+    border:1px solid var(--line);
+    color:var(--muted);
+    display:none;
+  }
+  .sync-banner.show{display:block;}
+  .sync-banner.err{border-color:var(--burgundy);color:#d6a3a3;}
+
+  /* --- Répertoire --- */
+  .rep-card{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:22px 22px 24px;
+    margin-bottom:18px;
+  }
+  .rep-head{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;}
+  .rep-color{
+    width:11px;height:11px;border-radius:50%;
+    flex:none;
+  }
+  .rep-color.black{background:#111;border:1px solid var(--brass-dim);}
+  .rep-color.white{background:var(--ivory);}
+  .rep-title{font-family:'Fraunces',serif;font-weight:600;font-size:19px;}
+  .rep-card p{font-size:14.5px;line-height:1.65;color:var(--ivory);margin:0 0 12px;}
+  .rep-card p:last-child{margin-bottom:0;}
+  .rep-card strong{color:var(--brass);font-weight:500;}
+  .notation{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13.5px;
+    background:rgba(176,141,87,0.1);
+    padding:1px 6px;
+    border-radius:2px;
+    color:#d8c9a3;
+  }
+
+  /* --- Flashcards --- */
+  .fc-progress{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .fc-progress-bar{
+    flex:1;height:3px;background:var(--line);margin-left:14px;position:relative;border-radius:2px;overflow:hidden;
+  }
+  .fc-progress-fill{
+    position:absolute;left:0;top:0;bottom:0;background:var(--sage);width:0%;transition:width .3s;
+  }
+
+  .card-stage{
+    perspective:1400px;
+    margin-bottom:18px;
+  }
+  .card{
+    position:relative;
+    min-height:230px;
+    border-radius:4px;
+    cursor:pointer;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    border-radius:4px;
+    border:1px solid var(--line);
+    padding:28px 26px;
+    display:flex;
+    flex-direction:column;
+  }
+  .face.front{background:var(--bg-card);}
+  .face.back{
+    background:var(--bg-elevated);
+    transform:rotateY(180deg);
+    border-color:var(--brass-dim);
+  }
+  .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:14px;
+  }
+  .q-text{
+    font-family:'Fraunces',serif;
+    font-size:19px;
+    line-height:1.4;
+    font-weight:500;
+  }
+  .a-text{
+    font-size:15px;
+    line-height:1.6;
+    color:var(--ivory);
+  }
+  .a-source{
+    margin-top:auto;
+    padding-top:14px;
+    font-size:12.5px;
+    color:var(--muted);
+    font-style:italic;
+  }
+  .flip-hint{
+    margin-top:auto;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:0.04em;
+  }
+
+  .fc-controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .fc-nav{display:flex;gap:8px;}
+  button.nav-btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    background:none;
+    border:1px solid var(--line);
+    color:var(--muted);
+    padding:9px 14px;
+    border-radius:3px;
+    cursor:pointer;
+    transition:border-color .2s, color .2s;
+  }
+  button.nav-btn:hover{border-color:var(--brass-dim);color:var(--brass);}
+  button.master-btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    border-radius:3px;
+    padding:9px 16px;
+    cursor:pointer;
+    border:1px solid var(--line);
+    background:none;
+    color:var(--muted);
+    transition:all .2s;
+  }
+  button.master-btn.on{
+    background:rgba(122,154,114,0.14);
+    border-color:var(--sage);
+    color:var(--sage);
+  }
+
+  /* --- Journal de parties --- */
+  .game-form{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:22px;
+    margin-bottom:28px;
+  }
+  .game-form h2{
+    font-family:'Fraunces',serif;font-weight:600;font-size:17px;margin:0 0 16px;
+  }
+  .field{margin-bottom:14px;}
+  .field label{
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+  .field textarea, .field input, .field select{
+    width:100%;
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:3px;
+    color:var(--ivory);
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    padding:10px 12px;
+  }
+  .field textarea{min-height:90px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;resize:vertical;}
+  .field-row{display:flex;gap:12px;flex-wrap:wrap;}
+  .field-row .field{flex:1;min-width:140px;}
+  button.primary-btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    background:rgba(176,141,87,0.14);
+    border:1px solid var(--brass);
+    color:var(--brass);
+    padding:10px 18px;
+    border-radius:3px;
+    cursor:pointer;
+    transition:background .2s;
+  }
+  button.primary-btn:hover{background:rgba(176,141,87,0.24);}
+  .form-msg{font-size:12.5px;margin-top:10px;color:var(--muted);}
+  .form-msg.err{color:#d6a3a3;}
+  .form-msg.ok{color:var(--sage);}
+
+  .game-list{display:flex;flex-direction:column;gap:10px;}
+  .game-item{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:14px 16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+  }
+  .game-item:hover{border-color:var(--brass-dim);}
+  .game-meta{font-size:13.5px;}
+  .game-meta .opp{font-family:'Fraunces',serif;font-weight:600;}
+  .game-meta .sub2{color:var(--muted);font-size:12px;margin-top:2px;}
+  .res-badge{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    padding:3px 9px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    flex:none;
+  }
+  .res-badge.win{color:var(--sage);border-color:var(--sage);}
+  .res-badge.loss{color:var(--burgundy);border-color:var(--burgundy);}
+  .res-badge.draw{color:var(--muted);}
+  .empty-note{color:var(--muted);font-size:13.5px;font-style:italic;}
+
+  /* --- Visionneuse --- */
+  .viewer{
+    background:var(--bg-elevated);
+    border:1px solid var(--brass-dim);
+    border-radius:3px;
+    padding:20px;
+    margin-top:18px;
+  }
+  .viewer-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;}
+  .viewer-head h3{font-family:'Fraunces',serif;font-size:17px;margin:0;}
+  .close-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .board{
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    max-width:360px;
+    margin:0 auto 14px;
+    border:1px solid var(--line);
+  }
+  .sq{
+    aspect-ratio:1;
+    display:flex;align-items:center;justify-content:center;
+    font-size:clamp(18px,4.2vw,28px);
+    user-select:none;
+  }
+  .sq.light{background:#3c352a;}
+  .sq.dark{background:#241f19;}
+  .sq .white-pc{color:#f2ead9;}
+  .sq .black-pc{color:#0c0a08;text-shadow:0 0 0 #0c0a08;}
+  .move-line{
+    text-align:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--muted);
+    margin-bottom:12px;
+    min-height:16px;
+  }
+  .viewer-controls{display:flex;justify-content:center;gap:8px;}
+  .game-note{
+    margin-top:14px;
+    font-size:13.5px;
+    line-height:1.6;
+    color:var(--ivory);
+    border-top:1px solid var(--line);
+    padding-top:12px;
+  }
+  .delete-link{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--muted);
+    background:none;border:none;cursor:pointer;
+    margin-top:10px;
+  }
+  .delete-link:hover{color:var(--burgundy);}
+
+  footer{
+    margin-top:40px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    font-size:12.5px;
+    color:var(--muted);
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">fi0riture · fioriture — 627 elo</div>
+    <h1>Carnet de progression</h1>
+    <p class="sub">Répertoire d'ouvertures, points d'amélioration et journal de parties. Synchronisé sur tous vos appareils.</p>
+  </header>
+
+  <div id="sync-banner" class="sync-banner"></div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="rep">Ouvertures</button>
+    <button class="tab" data-tab="fc">Flashcards</button>
+    <button class="tab" data-tab="journal">Journal de parties</button>
+  </div>
+
+  <!-- REPERTOIRE -->
+  <div class="panel active" id="panel-rep">
+
+    <div class="rep-card">
+      <div class="rep-head">
+        <span class="rep-color black"></span>
+        <span class="rep-title">Noir — Défense française, systématique</span>
+      </div>
+      <p>Jouer la Française contre <span class="notation">1.e4</span> est un choix solide et cohérent — structure claire (chaîne <span class="notation">e6/d5</span>), peu de théorie à apprendre par cœur. Le souci n'est pas l'ouverture, c'est qu'elle ne répond qu'à <span class="notation">1.e4</span>. Contre autre chose, tu improvises.</p>
+      <p><strong>Piste simple :</strong> plutôt que d'apprendre un second système complet, vise la même structure par transposition. Contre <span class="notation">1.d4</span>, <span class="notation">1.c4</span> ou <span class="notation">1.Nf3</span>, joue <span class="notation">...d5</span> puis <span class="notation">...e6</span> et développe normalement — tu retombes dans des positions très proches de ce que tu connais déjà (structure de Dame refusée), avec les mêmes réflexes de plan (rupture ...c5, minorité de pions).</p>
+    </div>
+
+    <div class="rep-card">
+      <div class="rep-head">
+        <span class="rep-color white"></span>
+        <span class="rep-title">Blanc — Gambit Dame, à consolider</span>
+      </div>
+      <p>Bon choix stratégique pour un joueur qui aime les positions structurées. Ta partie du 20/07 montre que tu connais déjà la ligne principale <span class="notation">3...dxc4 4.e4</span> jusqu'à l'échange des dames — c'est du solide.</p>
+      <p><strong>À travailler en priorité :</strong> les réponses de Noir autres que l'acceptation (<span class="notation">2...e6</span> refusé, <span class="notation">2...c6</span> slave). Ce sont les positions où tu perds le plus souvent le fil du plan. Un seul thème à maîtriser suffit pour l'instant : l'attaque de la minorité sur l'aile dame — c'est le plan qui revient dans presque toutes les structures de Gambit Dame refusé.</p>
+    </div>
+
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div class="panel" id="panel-fc">
+
+    <div class="fc-progress">
+      <span id="fc-counter">Carte 1 / 5</span>
+      <div class="fc-progress-bar"><div class="fc-progress-fill" id="fc-fill"></div></div>
+      <span id="fc-mastered-count" style="margin-left:14px;">0 maîtrisées</span>
+    </div>
+
+    <div class="card-stage">
+      <div class="card" id="card">
+        <div class="face front">
+          <div class="tag" id="tag-front">—</div>
+          <div class="q-text" id="q-text">—</div>
+          <div class="flip-hint">Touche la carte pour voir la réponse ↻</div>
+        </div>
+        <div class="face back">
+          <div class="tag" id="tag-back">—</div>
+          <div class="a-text" id="a-text">—</div>
+          <div class="a-source" id="a-source">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-controls">
+      <div class="fc-nav">
+        <button class="nav-btn" id="prev-btn">← Précédente</button>
+        <button class="nav-btn" id="next-btn">Suivante →</button>
+      </div>
+      <button class="master-btn" id="master-btn">Marquer maîtrisée</button>
+    </div>
+
+  </div>
+
+  <!-- JOURNAL DE PARTIES -->
+  <div class="panel" id="panel-journal">
+
+    <div class="game-form">
+      <h2>Ajouter une partie</h2>
+      <div class="field">
+        <label for="in-pgn">PGN</label>
+        <textarea id="in-pgn" placeholder="Collez ici le PGN complet de la partie (avec ou sans les en-têtes [Event] [White] [Black]...)"></textarea>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="in-opponent">Adversaire</label>
+          <input type="text" id="in-opponent" placeholder="Pseudo Chess.com">
+        </div>
+        <div class="field">
+          <label for="in-date">Date</label>
+          <input type="date" id="in-date">
+        </div>
+        <div class="field">
+          <label for="in-result">Résultat</label>
+          <select id="in-result">
+            <option value="win">Victoire</option>
+            <option value="loss">Défaite</option>
+            <option value="draw">Nulle</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="in-opening">Ouverture jouée (optionnel)</label>
+        <input type="text" id="in-opening" placeholder="ex. Défense française, Gambit Dame refusé...">
+      </div>
+      <div class="field">
+        <label for="in-note">Note personnelle (optionnel)</label>
+        <textarea id="in-note" style="font-family:'Inter',sans-serif;font-size:14px;min-height:60px;" placeholder="Ce que j'ai appris, une erreur à ne pas refaire..."></textarea>
+      </div>
+      <button class="primary-btn" id="add-game-btn">Ajouter au journal</button>
+      <div class="form-msg" id="form-msg"></div>
+    </div>
+
+    <div id="game-list" class="game-list">
+      <p class="empty-note">Chargement...</p>
+    </div>
+
+    <div id="viewer" class="viewer" style="display:none;"></div>
+
+  </div>
+
+  <footer>Carnet tenu par ton coach — s'enrichit à chaque partie analysée.</footer>
+</div>
+
+<script>
+  /* ==========================================================
+     ⚠️ CONFIGURATION SUPABASE — à remplacer une seule fois
+     Project Settings → API dans votre projet Supabase
+     ========================================================== */
+  const SUPABASE_URL = "REMPLACER_PAR_VOTRE_URL_SUPABASE";
+  const SUPABASE_ANON_KEY = "REMPLACER_PAR_VOTRE_CLE_ANON_SUPABASE";
+
+  const sbReady = SUPABASE_URL.startsWith("http") && SUPABASE_ANON_KEY.length > 20;
+  const sb = sbReady ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+  const banner = document.getElementById('sync-banner');
+  if(!sbReady){
+    banner.textContent = "⚠ Supabase non configuré : la sauvegarde et le journal de parties ne fonctionneront pas tant que SUPABASE_URL et SUPABASE_ANON_KEY ne sont pas renseignés dans le code.";
+    banner.classList.add('show','err');
+  }
+
+  /* ---------- Onglets ---------- */
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  /* ==========================================================
+     FLASHCARDS
+     ========================================================== */
+  const cards = [
+    {
+      tag: "Calcul — prises",
+      q: "Ton adversaire vient de prendre une pièce. Quel est ton réflexe avant de jouer ton propre plan ?",
+      a: "Vérifie si tu dois reprendre, et ce qui se passe si tu ne le fais pas. C'est le contrôle le plus simple et le plus souvent oublié.",
+      source: "Partie du 20/07 — pièce perdue gratuitement après 17...Bxc3 non repris."
+    },
+    {
+      tag: "Défense du roi",
+      q: "Tu viens de gagner du matériel (ou de promouvoir) mais ton roi encaisse échec sur échec. Que fais-tu ?",
+      a: "Fais revenir tes pièces actives pour bloquer ou contre-attaquer — ne fuis pas indéfiniment avec le roi seul. Et évite d'ouvrir toi-même les lignes devant ton roi en poussant tes pions.",
+      source: "Partie perdue malgré une dame d'avance juste après la promotion du pion b."
+    },
+    {
+      tag: "Sécurité des pièces",
+      q: "Ton fou recule loin en territoire adverse (ex : a5, b6). Que dois-tu vérifier avant de jouer ce coup ?",
+      a: "Qu'il ait une case de repli si l'adversaire pousse un pion dessus. Sinon la pièce peut se retrouver piégée sans échange.",
+      source: "Fou emprisonné et perdu gratuitement sur b6."
+    },
+    {
+      tag: "Colonnes ouvertes",
+      q: "Une colonne s'ouvre juste à côté d'une de tes tours non protégée. À quoi penser immédiatement ?",
+      a: "Est-ce que l'adversaire peut s'y engouffrer avant moi ? Une colonne ouverte est un couloir à double sens.",
+      source: "Deux tours perdues coup sur coup faute d'y avoir pensé à temps."
+    },
+    {
+      tag: "Pions périphériques",
+      q: "Tu viens de roquer, ou une tour vient de quitter la colonne h (ou a). À quoi ce pion devient-il exposé ?",
+      a: "Une fois la tour partie, ce pion n'est souvent plus défendu que par le vide. Vérifie systématiquement qui protège encore ton pion h7/a7 (ou h2/a2) après chaque coup qui éloigne une pièce de ce coin.",
+      source: "Pion h7 croqué gratuitement par la dame adverse juste après le déplacement de la tour h8 vers e8."
+    }
+  ];
+
+  let idx = 0;
+  let flipped = false;
+  let masteredMap = {};
+  const cardEl = document.getElementById('card');
+
+  async function loadMasteredMap(){
+    if(!sb) return {};
+    const { data, error } = await sb.from('flashcard_status').select('card_id, mastered');
+    const map = {};
+    if(!error && data){ data.forEach(r => { map[r.card_id] = r.mastered; }); }
+    return map;
+  }
+
+  function isMastered(i){ return !!masteredMap[i]; }
+
+  async function setMastered(i, val){
+    masteredMap[i] = val;
+    if(!sb) return;
+    await sb.from('flashcard_status').upsert({ card_id: i, mastered: val, updated_at: new Date().toISOString() });
+  }
+
+  function renderMasteredCount(){
+    let count = 0;
+    for(let i=0;i<cards.length;i++){ if(isMastered(i)) count++; }
+    document.getElementById('fc-mastered-count').textContent = count + ' / ' + cards.length + ' maîtrisées';
+  }
+
+  function renderCard(){
+    const c = cards[idx];
+    document.getElementById('tag-front').textContent = c.tag;
+    document.getElementById('tag-back').textContent = c.tag;
+    document.getElementById('q-text').textContent = c.q;
+    document.getElementById('a-text').textContent = c.a;
+    document.getElementById('a-source').textContent = c.source;
+    document.getElementById('fc-counter').textContent = 'Carte ' + (idx+1) + ' / ' + cards.length;
+    document.getElementById('fc-fill').style.width = (((idx+1)/cards.length)*100) + '%';
+    flipped = false;
+    cardEl.classList.remove('flipped');
+
+    const mastered = isMastered(idx);
+    const btn = document.getElementById('master-btn');
+    btn.classList.toggle('on', mastered);
+    btn.textContent = mastered ? '✓ Maîtrisée' : 'Marquer maîtrisée';
+    renderMasteredCount();
+  }
+
+  cardEl.addEventListener('click', () => {
+    flipped = !flipped;
+    cardEl.classList.toggle('flipped', flipped);
+  });
+
+  document.getElementById('prev-btn').addEventListener('click', () => {
+    idx = (idx - 1 + cards.length) % cards.length;
+    renderCard();
+  });
+  document.getElementById('next-btn').addEventListener('click', () => {
+    idx = (idx + 1) % cards.length;
+    renderCard();
+  });
+  document.getElementById('master-btn').addEventListener('click', async (e) => {
+    e.stopPropagation();
+    await setMastered(idx, !isMastered(idx));
+    renderCard();
+  });
+
+  /* ==========================================================
+     JOURNAL DE PARTIES
+     ========================================================== */
+  const PIECE_GLYPH = { k:'♚',q:'♛',r:'♜',b:'♝',n:'♞',p:'♟' };
+
+  function fenToRows(fen){
+    const rows = fen.split(' ')[0].split('/');
+    return rows.map(row => {
+      const r = [];
+      for(const ch of row){
+        if(/\d/.test(ch)){ for(let i=0;i<parseInt(ch,10);i++) r.push(null); }
+        else r.push(ch);
+      }
+      return r;
+    });
+  }
+
+  function renderBoard(fen, container){
+    container.innerHTML = '';
+    const rows = fenToRows(fen);
+    rows.forEach((row, rIdx) => {
+      row.forEach((piece, cIdx) => {
+        const sq = document.createElement('div');
+        const isLight = (rIdx + cIdx) % 2 === 0;
+        sq.className = 'sq ' + (isLight ? 'light' : 'dark');
+        if(piece){
+          const isWhite = piece === piece.toUpperCase();
+          const glyph = PIECE_GLYPH[piece.toLowerCase()];
+          const span = document.createElement('span');
+          span.className = isWhite ? 'white-pc' : 'black-pc';
+          span.textContent = glyph;
+          sq.appendChild(span);
+        }
+        container.appendChild(sq);
+      });
+    });
+  }
+
+  function resultBadge(result){
+    if(result === 'win') return '<span class="res-badge win">Victoire</span>';
+    if(result === 'loss') return '<span class="res-badge loss">Défaite</span>';
+    return '<span class="res-badge draw">Nulle</span>';
+  }
+
+  async function loadGames(){
+    if(!sb) return [];
+    const { data, error } = await sb.from('games')
+      .select('*')
+      .order('played_on', { ascending: false, nullsFirst: false })
+      .order('created_at', { ascending: false });
+    return error ? [] : (data || []);
+  }
+
+  function renderGameList(games){
+    const list = document.getElementById('game-list');
+    if(!games.length){
+      list.innerHTML = '<p class="empty-note">Aucune partie enregistrée pour l\'instant.</p>';
+      return;
+    }
+    list.innerHTML = '';
+    games.forEach(g => {
+      const item = document.createElement('div');
+      item.className = 'game-item';
+      item.innerHTML = `
+        <div class="game-meta">
+          <div class="opp">${g.opponent || 'Adversaire inconnu'}</div>
+          <div class="sub2">${g.played_on || '—'}${g.opening ? ' · ' + g.opening : ''}</div>
+        </div>
+        ${resultBadge(g.result)}
+      `;
+      item.addEventListener('click', () => openViewer(g));
+      list.appendChild(item);
+    });
+  }
+
+  let currentReplay = null;
+
+  function openViewer(game){
+    const viewer = document.getElementById('viewer');
+    viewer.style.display = 'block';
+    viewer.innerHTML = `
+      <div class="viewer-head">
+        <h3>${game.opponent || 'Partie'} — ${game.played_on || ''}</h3>
+        <button class="close-btn" id="close-viewer">Fermer ✕</button>
+      </div>
+      <div class="board" id="replay-board"></div>
+      <div class="move-line" id="replay-move"></div>
+      <div class="viewer-controls">
+        <button class="nav-btn" id="replay-prev">← Coup précédent</button>
+        <button class="nav-btn" id="replay-next">Coup suivant →</button>
+      </div>
+      ${game.note ? `<div class="game-note">${game.note}</div>` : ''}
+      <button class="delete-link" id="delete-game">Supprimer cette partie</button>
+    `;
+    viewer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    document.getElementById('close-viewer').addEventListener('click', () => {
+      viewer.style.display = 'none';
+      viewer.innerHTML = '';
+    });
+    document.getElementById('delete-game').addEventListener('click', async () => {
+      if(confirm('Supprimer définitivement cette partie du journal ?')){
+        if(sb) await sb.from('games').delete().eq('id', game.id);
+        viewer.style.display = 'none';
+        refreshGames();
+      }
+    });
+
+    const chess = new Chess();
+    let history = [];
+    try{
+      chess.load_pgn(game.pgn);
+      history = chess.history();
+    }catch(e){
+      history = [];
+    }
+
+    let step = history.length; // position finale par défaut
+
+    function renderStep(){
+      const replay = new Chess();
+      for(let i=0;i<step;i++){ replay.move(history[i]); }
+      renderBoard(replay.fen(), document.getElementById('replay-board'));
+      document.getElementById('replay-move').textContent = step === 0
+        ? 'Position de départ'
+        : `Coup ${step} / ${history.length} — ${history[step-1]}`;
+    }
+
+    if(!history.length){
+      document.getElementById('replay-move').textContent = 'PGN illisible — vérifiez le format collé.';
+      renderBoard('8/8/8/8/8/8/8/8 w - - 0 1', document.getElementById('replay-board'));
+    } else {
+      renderStep();
+    }
+
+    document.getElementById('replay-prev').addEventListener('click', () => {
+      step = Math.max(0, step - 1);
+      renderStep();
+    });
+    document.getElementById('replay-next').addEventListener('click', () => {
+      step = Math.min(history.length, step + 1);
+      renderStep();
+    });
+  }
+
+  async function refreshGames(){
+    const games = await loadGames();
+    renderGameList(games);
+  }
+
+  document.getElementById('add-game-btn').addEventListener('click', async () => {
+    const msg = document.getElementById('form-msg');
+    msg.className = 'form-msg';
+    const pgn = document.getElementById('in-pgn').value.trim();
+    const opponent = document.getElementById('in-opponent').value.trim();
+    const played_on = document.getElementById('in-date').value || null;
+    const result = document.getElementById('in-result').value;
+    const opening = document.getElementById('in-opening').value.trim();
+    const note = document.getElementById('in-note').value.trim();
+
+    if(!pgn){
+      msg.textContent = 'Collez d\'abord le PGN de la partie.';
+      msg.classList.add('err');
+      return;
+    }
+    try{
+      const test = new Chess();
+      if(!test.load_pgn(pgn)){
+        msg.textContent = 'Ce PGN n\'a pas pu être lu. Vérifiez qu\'il est complet et bien formaté.';
+        msg.classList.add('err');
+        return;
+      }
+    }catch(e){
+      msg.textContent = 'Ce PGN n\'a pas pu être lu. Vérifiez qu\'il est complet et bien formaté.';
+      msg.classList.add('err');
+      return;
+    }
+
+    if(!sb){
+      msg.textContent = 'Supabase n\'est pas configuré — impossible d\'enregistrer pour l\'instant.';
+      msg.classList.add('err');
+      return;
+    }
+
+    const { error } = await sb.from('games').insert({
+      pgn, opponent, played_on, result, opening, note
+    });
+
+    if(error){
+      msg.textContent = 'Erreur d\'enregistrement : ' + error.message;
+      msg.classList.add('err');
+      return;
+    }
+
+    msg.textContent = 'Partie ajoutée au journal.';
+    msg.classList.add('ok');
+    document.getElementById('in-pgn').value = '';
+    document.getElementById('in-opponent').value = '';
+    document.getElementById('in-date').value = '';
+    document.getElementById('in-opening').value = '';
+    document.getElementById('in-note').value = '';
+    refreshGames();
+  });
+
+  /* Auto-remplissage best-effort depuis les en-têtes du PGN collé */
+  document.getElementById('in-pgn').addEventListener('blur', () => {
+    const pgn = document.getElementById('in-pgn').value.trim();
+    if(!pgn) return;
+    try{
+      const chess = new Chess();
+      if(!chess.load_pgn(pgn)) return;
+      const h = chess.header();
+      const me = 'fioriture';
+      const white = (h.White || '').toLowerCase();
+      const black = (h.Black || '').toLowerCase();
+      const oppField = document.getElementById('in-opponent');
+      const dateField = document.getElementById('in-date');
+      const resField = document.getElementById('in-result');
+
+      if(!oppField.value){
+        if(white === me.toLowerCase()) oppField.value = h.Black || '';
+        else if(black === me.toLowerCase()) oppField.value = h.White || '';
+      }
+      if(!dateField.value && h.Date && /\d{4}\.\d{2}\.\d{2}/.test(h.Date)){
+        dateField.value = h.Date.replace(/\./g, '-');
+      }
+      if(h.Result){
+        const iAmWhite = white === me.toLowerCase();
+        if(h.Result === '1-0') resField.value = iAmWhite ? 'win' : 'loss';
+        else if(h.Result === '0-1') resField.value = iAmWhite ? 'loss' : 'win';
+        else if(h.Result === '1/2-1/2') resField.value = 'draw';
+      }
+    }catch(e){ /* silencieux : auto-remplissage best-effort */ }
+  });
+
+  /* ---------- Initialisation ---------- */
+  (async function init(){
+    masteredMap = await loadMasteredMap();
+    renderCard();
+    await refreshGames();
+  })();
+</script>
+</body>
+</html>
