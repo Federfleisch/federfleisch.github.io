@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brûlot | Sauces piquantes de caractère</title>
+<meta name="description" content="Brûlot, trois sauces piquantes brassées lentement. Du fruité qui chatouille au feu qui parle. Concept de landing page.">
+<meta name="theme-color" content="#120a08">
+<link rel="icon" href="/favicon.ico">
+<style>
+@font-face{font-family:"Clarendon";src:url("/fonts/superclarendon_bd-webfont.woff2") format("woff2"),url("/fonts/superclarendon_bd-webfont.woff") format("woff");font-weight:700;font-display:swap}
+@font-face{font-family:"Clarendon";src:url("/fonts/superclarendon_lt-webfont.woff2") format("woff2"),url("/fonts/superclarendon_lt-webfont.woff") format("woff");font-weight:300;font-display:swap}
+@font-face{font-family:"Source";src:url("/fonts/sourcesanspro-regular-webfont.woff2") format("woff2"),url("/fonts/sourcesanspro-regular-webfont.woff") format("woff");font-weight:400;font-display:swap}
+@font-face{font-family:"Source";src:url("/fonts/sourcesanspro-light-webfont.woff2") format("woff2"),url("/fonts/sourcesanspro-light-webfont.woff") format("woff");font-weight:300;font-display:swap}
+
+:root{
+  --bg:#120a08;--bg2:#1c0f0b;--ink:#f6ebdd;--muted:#b9a592;
+  --heat:#ff5a1f;--heat2:#ffb21f;--glow:rgba(255,90,31,.35);
+  --line:rgba(246,235,221,.12);
+  --serif:"Clarendon","Rockwell","Georgia",serif;
+  --sans:"Source","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:18px;line-height:1.6;overflow-x:hidden;transition:background .6s}
+a{color:inherit}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.02;letter-spacing:-.02em}
+.eyebrow{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--heat2);font-weight:400}
+canvas#embers{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+main,header,footer,section{position:relative;z-index:1}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:20;padding:18px 0;transition:background .3s,backdrop-filter .3s}
+nav.stuck{background:rgba(18,10,8,.75);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--serif);font-weight:700;font-size:24px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:12px;height:12px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:linear-gradient(135deg,var(--heat2),var(--heat));box-shadow:0 0 18px var(--heat)}
+nav ul{display:flex;gap:28px;list-style:none;font-size:15px}
+nav ul a{text-decoration:none;color:var(--muted);transition:color .2s}
+nav ul a:hover{color:var(--ink)}
+.btn{display:inline-block;padding:14px 28px;border-radius:999px;background:linear-gradient(135deg,var(--heat2),var(--heat));color:#1a0a04;font-weight:400;text-decoration:none;font-size:16px;border:0;cursor:pointer;box-shadow:0 10px 40px -10px var(--glow);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 16px 50px -8px var(--heat)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:var(--heat2)}
+
+/* hero */
+.hero{min-height:100vh;display:grid;align-items:center;padding:120px 0 80px;overflow:hidden}
+.hero::before{content:"";position:absolute;left:50%;top:55%;width:900px;height:900px;transform:translate(-50%,-50%);background:radial-gradient(circle,var(--glow),transparent 62%);filter:blur(20px);animation:breathe 5s ease-in-out infinite;z-index:-1}
+@keyframes breathe{50%{transform:translate(-50%,-50%) scale(1.15);opacity:.7}}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(48px,7.6vw,108px);margin:18px 0 26px}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--heat2),var(--heat) 55%,#ff2a1f);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;padding-bottom:.12em;animation:flick 3s ease-in-out infinite}
+@keyframes flick{0%,100%{filter:drop-shadow(0 0 12px rgba(255,90,31,.4))}50%{filter:drop-shadow(0 0 28px rgba(255,140,31,.8))}}
+.hero p.lead{max-width:34ch;font-size:21px;color:var(--muted);margin-bottom:34px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+.bottle-stage{position:relative;display:grid;place-items:center;perspective:900px}
+.bottle{width:min(320px,70vw);filter:drop-shadow(0 40px 50px rgba(0,0,0,.6));transition:transform .15s ease-out;will-change:transform;animation:float 6s ease-in-out infinite}
+@keyframes float{50%{translate:0 -14px}}
+.badge{position:absolute;right:2%;top:8%;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--serif);font-weight:700;font-size:14px;line-height:1.15;background:var(--ink);color:#1a0a04;transform:rotate(12deg);animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(372deg)}}
+
+/* marquee */
+.marquee{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;background:var(--bg2);padding:18px 0}
+.marquee div{display:inline-block;animation:slide 32s linear infinite;font-family:var(--serif);font-size:28px;color:var(--muted)}
+.marquee span{margin:0 26px;color:var(--heat)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section.block{padding:130px 0}
+.head{max-width:700px;margin-bottom:64px}
+.head h2{font-size:clamp(38px,5.5vw,68px);margin:14px 0 18px}
+.head p{color:var(--muted)}
+
+/* range */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{position:relative;border:1px solid var(--line);border-radius:28px;padding:34px 30px 30px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));overflow:hidden;transition:transform .35s,border-color .35s;--c:var(--heat)}
+.card::before{content:"";position:absolute;inset:auto -30% -60% -30%;height:70%;background:radial-gradient(closest-side,var(--c),transparent);opacity:.0;transition:opacity .4s}
+.card:hover{transform:translateY(-8px);border-color:var(--c)}
+.card:hover::before{opacity:.28}
+.card .num{font-family:var(--serif);font-size:15px;color:var(--c)}
+.card h3{font-size:36px;margin:12px 0 10px}
+.card p{color:var(--muted);font-size:16px;margin-bottom:26px;min-height:78px}
+.meter{display:flex;gap:6px;margin-bottom:10px}
+.meter i{flex:1;height:8px;border-radius:4px;background:var(--line)}
+.meter i.on{background:var(--c);box-shadow:0 0 12px var(--c)}
+.card small{color:var(--muted);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.card .price{display:flex;justify-content:space-between;align-items:center;margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--serif);font-size:24px}
+.card .price a{font-family:var(--sans);font-size:14px;text-decoration:none;color:var(--c);border-bottom:1px solid}
+
+/* heat lab */
+.lab{background:var(--bg2);border-block:1px solid var(--line)}
+.lab .wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.lab h2{font-size:clamp(38px,5vw,62px);margin:14px 0 18px}
+.dial{padding:40px;border:1px solid var(--line);border-radius:32px;background:var(--bg)}
+.dial output{display:block;font-family:var(--serif);font-size:clamp(54px,8vw,92px);line-height:1;color:var(--heat);text-shadow:0 0 40px var(--glow)}
+.dial .unit{color:var(--muted);font-size:14px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:22px}
+.dial h4{font-family:var(--serif);font-size:26px;margin:18px 0 6px}
+.dial p{color:var(--muted);font-size:16px;min-height:54px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:5px;background:linear-gradient(90deg,#ffd86b,var(--heat2),var(--heat),#c1121f);margin:26px 0 6px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:var(--ink);border:4px solid var(--heat);box-shadow:0 0 22px var(--heat);cursor:grab}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--ink);border:4px solid var(--heat);box-shadow:0 0 22px var(--heat);cursor:grab}
+.scale{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.step{padding:34px 26px 10px 0;border-right:1px solid var(--line);padding-left:26px}
+.step:first-child{padding-left:0}.step:last-child{border-right:0}
+.step b{font-family:var(--serif);font-size:56px;color:transparent;-webkit-text-stroke:1px var(--heat);display:block;line-height:1}
+.step h3{font-size:24px;margin:16px 0 8px}
+.step p{color:var(--muted);font-size:16px}
+
+/* quote + cta */
+.quote{text-align:center;padding:140px 0}
+.quote blockquote{font-family:var(--serif);font-weight:300;font-size:clamp(28px,4.4vw,54px);line-height:1.18;max-width:20em;margin:0 auto 26px}
+.quote cite{color:var(--muted);font-style:normal;font-size:15px}
+.final{text-align:center;padding:140px 0 150px;background:radial-gradient(ellipse at 50% 120%,var(--glow),transparent 60%)}
+.final h2{font-size:clamp(44px,8vw,110px);margin-bottom:28px}
+form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+input[type=email]{width:min(380px,100%);padding:15px 22px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);font:inherit;font-size:16px;outline:none;transition:border-color .2s}
+input[type=email]:focus{border-color:var(--heat2)}
+.ok{margin-top:18px;color:var(--heat2);min-height:28px}
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv:nth-child(2){transition-delay:.1s}.rv:nth-child(3){transition-delay:.2s}.rv:nth-child(4){transition-delay:.3s}
+
+@media(max-width:900px){
+  nav ul{display:none}
+  .hero .wrap,.lab .wrap{grid-template-columns:1fr}
+  .bottle-stage{order:-1}
+  .cards{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .step:nth-child(2){border-right:0}
+  .step{padding-left:0!important;padding-bottom:30px}
+  section.block{padding:90px 0}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="embers" aria-hidden="true"></canvas>
+
+<nav id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><i></i>Brûlot</a>
+    <ul>
+      <li><a href="#gamme">La gamme</a></li>
+      <li><a href="#labo">Le labo</a></li>
+      <li><a href="#methode">La méthode</a></li>
+    </ul>
+    <a class="btn" href="#commande" style="padding:10px 22px;font-size:15px">Précommander</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Sauces piquantes · Brassées en petits lots</span>
+      <h1>Le feu,<br>mais <em>avec du goût.</em></h1>
+      <p class="lead">Trois sauces fermentées lentement, pensées pour le barbecue, la bière et les amis qui disent « ça va, je gère ».</p>
+      <div class="cta">
+        <a class="btn" href="#commande">Rejoindre la liste</a>
+        <a class="btn ghost" href="#gamme">Voir la gamme</a>
+      </div>
+    </div>
+    <div class="bottle-stage" id="stage">
+      <svg class="bottle" id="bottle" viewBox="0 0 220 460" role="img" aria-label="Bouteille de sauce Brûlot">
+        <defs>
+          <linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#3a0d05"/><stop offset=".35" stop-color="#c8260a"/><stop offset=".5" stop-color="#ff6a2b"/><stop offset="1" stop-color="#4a0f05"/></linearGradient>
+          <linearGradient id="lb" x1="0" x2="1"><stop offset="0" stop-color="#e9dcc7"/><stop offset=".5" stop-color="#fbf3e4"/><stop offset="1" stop-color="#d8c8ae"/></linearGradient>
+          <linearGradient id="cap" x1="0" x2="1"><stop offset="0" stop-color="#111"/><stop offset=".4" stop-color="#3a3a3a"/><stop offset="1" stop-color="#0c0c0c"/></linearGradient>
+        </defs>
+        <rect x="88" y="6" width="44" height="46" rx="6" fill="url(#cap)"/>
+        <rect x="84" y="46" width="52" height="16" rx="4" fill="#1c1c1c"/>
+        <path d="M92 62h36v50c0 14 40 28 40 70v236c0 22-14 34-34 34H86c-20 0-34-12-34-34V182c0-42 40-56 40-70z" fill="url(#gl)"/>
+        <rect x="52" y="200" width="116" height="170" fill="url(#lb)"/>
+        <path d="M52 200h116" stroke="#1a0a04" stroke-width="3"/><path d="M52 370h116" stroke="#1a0a04" stroke-width="3"/>
+        <path d="M110 222c14 16 22 28 22 42a22 22 0 0 1-44 0c0-10 5-18 12-26 2 8 6 11 10 11-4-10-3-20 0-27z" fill="#e8420f"/>
+        <path d="M110 250c7 8 10 13 10 19a10 10 0 0 1-20 0c0-5 3-9 6-12 1 4 3 5 4 5-2-5-1-8 0-12z" fill="#ffb21f"/>
+        <text x="110" y="320" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="28" fill="#1a0a04">Brûlot</text>
+        <text x="110" y="342" text-anchor="middle" font-family="Georgia,serif" font-size="10" letter-spacing="3" fill="#6b3a1e">N°2 · FUMÉE</text>
+        <path d="M66 130c-8 30-10 80-10 110" stroke="#fff" stroke-opacity=".28" stroke-width="7" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="badge">Brassée<br>à la main<br>en Wallonie</div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div>
+  Fermentée 60 jours <span>✦</span> Zéro conservateur <span>✦</span> Piment frais <span>✦</span> Petits lots <span>✦</span> Bière bienvenue <span>✦</span>
+  Fermentée 60 jours <span>✦</span> Zéro conservateur <span>✦</span> Piment frais <span>✦</span> Petits lots <span>✦</span> Bière bienvenue <span>✦</span>
+</div></div>
+
+<section class="block" id="gamme">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="eyebrow">La gamme</span>
+      <h2>Trois caractères, un seul sourire en coin.</h2>
+      <p>Chaque sauce a son rôle à table. On commence doucement, on finit en sueur, et on recommence.</p>
+    </div>
+    <div class="cards">
+      <article class="card rv" style="--c:#ffc83d">
+        <span class="num">N°1</span>
+        <h3>Mangue Solaire</h3>
+        <p>Mangue mûre, habanero jaune, citron vert. Sucrée d'abord, piquante ensuite. Parfaite sur un poulet grillé.</p>
+        <div class="meter"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+        <small>Chaleur 2 / 5</small>
+        <div class="price">9,50 € <a href="#commande">Je veux</a></div>
+      </article>
+      <article class="card rv" style="--c:#ff5a1f">
+        <span class="num">N°2</span>
+        <h3>Fumée Noire</h3>
+        <p>Piment chipotle fumé sur braises, mélasse, une pointe de bière brune. Elle sent le feu de camp, en bien.</p>
+        <div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+        <small>Chaleur 4 / 5</small>
+        <div class="price">9,50 € <a href="#commande">Je veux</a></div>
+      </article>
+      <article class="card rv" style="--c:#e01b24">
+        <span class="num">N°3</span>
+        <h3>Dernier Avis</h3>
+        <p>Carolina Reaper, ail noir, vinaigre de cidre. Elle ne fait pas de politique, elle fait de l'effet. À doser à la goutte.</p>
+        <div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <small>Chaleur 5 / 5</small>
+        <div class="price">11,00 € <a href="#commande">Je veux</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block lab" id="labo">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">Le labo</span>
+      <h2>Règle ton niveau de courage.</h2>
+      <p style="color:var(--muted)">Fais glisser le curseur. On te dit ce que ton palais risque et laquelle de nos sauces t'attend. Les valeurs sont des ordres de grandeur, pas une promesse de laboratoire.</p>
+    </div>
+    <div class="dial rv">
+      <output id="shu">5 000</output>
+      <div class="unit">unités Scoville (approx.)</div>
+      <input id="range" type="range" min="0" max="100" value="22" aria-label="Niveau de chaleur">
+      <div class="scale"><span>Doux</span><span>Costaud</span><span>Cascade</span></div>
+      <h4 id="vTitle"></h4>
+      <p id="vText"></p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="methode">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="eyebrow">La méthode</span>
+      <h2>Lent, sale en surface, propre en bouche.</h2>
+    </div>
+    <div class="steps">
+      <div class="step rv"><b>01</b><h3>Piments frais</h3><p>Choisis à la main, hachés avec une pincée de sel, rien d'autre.</p></div>
+      <div class="step rv"><b>02</b><h3>Fermentation</h3><p>Soixante jours en cuve, à son rythme. C'est là que le goût se construit.</p></div>
+      <div class="step rv"><b>03</b><h3>Mixage</h3><p>Fruits, fumée ou ail noir selon la recette. Pas d'épaississant, pas de raccourci.</p></div>
+      <div class="step rv"><b>04</b><h3>Mise en bouteille</h3><p>Petits lots numérotés, étiquetés un par un. Quand c'est fini, c'est fini.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap rv">
+    <blockquote>« J'ai pleuré, j'ai ri, j'en ai remis. »</blockquote>
+    <cite>Un testeur anonyme, devant une assiette de ribs</cite>
+  </div>
+</section>
+
+<section class="final" id="commande">
+  <div class="wrap rv">
+    <span class="eyebrow">Prochaine fournée</span>
+    <h2>Tu viens<br>ou tu regardes ?</h2>
+    <p style="color:var(--muted);max-width:36ch;margin-inline:auto">Laisse ton e-mail, on te prévient dès que les bouteilles sortent de cuve.</p>
+    <form id="form">
+      <input type="email" required placeholder="ton@email.be" aria-label="Adresse e-mail">
+      <button class="btn" type="submit">Me prévenir</button>
+    </form>
+    <div class="ok" id="ok" role="status"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Brûlot. Marque fictive, concept de landing page.</span>
+    <a href="/">Retour au portfolio de Denis Lefèvre</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // nav
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('stuck',scrollY>40)},{passive:true});
+
+  // reveal
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+
+  // bottle tilt
+  var stage=document.getElementById('stage'),bottle=document.getElementById('bottle');
+  stage.addEventListener('pointermove',function(e){
+    var r=stage.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    bottle.style.transform='rotateY('+(x*28)+'deg) rotateX('+(-y*18)+'deg)';
+  });
+  stage.addEventListener('pointerleave',function(){bottle.style.transform=''});
+
+  // heat dial
+  var levels=[
+    [0,'Doux comme un agneau','Tu sens le goût, pas le piment. Mangue Solaire te va comme un gant.'],
+    [20,'Un petit picotement','Le nez coule à peine. Mangue Solaire, avec une deuxième cuillère.'],
+    [45,'Là, ça chauffe','Le front perle, la bière devient utile. Fumée Noire fera ton bonheur.'],
+    [70,'Courage, camarade','Tu parles moins, tu souris plus. Fumée Noire, mais prévois du pain.'],
+    [90,'Zone interdite','Respect. Dernier Avis, une goutte, et dis adieu à tes plans pour l\'heure qui vient.']
+  ];
+  var r=document.getElementById('range'),shu=document.getElementById('shu'),vt=document.getElementById('vTitle'),vx=document.getElementById('vText'),root=document.documentElement;
+  function heat(){
+    var v=+r.value/100;
+    var n=Math.round(500*Math.pow(2200000/500,v)/100)*100;
+    shu.textContent=n.toLocaleString('fr-BE').replace(/ /g,' ');
+    var hue=45-v*45;
+    root.style.setProperty('--heat','hsl('+hue+',100%,'+(58-v*8)+'%)');
+    root.style.setProperty('--glow','hsla('+hue+',100%,55%,.35)');
+    var l=levels[0];levels.forEach(function(x){if(+r.value>=x[0])l=x});
+    vt.textContent=l[1];vx.textContent=l[2];
+    intensity=.4+v*1.6;
+  }
+  var intensity=1;
+  r.addEventListener('input',heat);
+
+  // embers
+  var c=document.getElementById('embers'),g=c.getContext('2d'),W,H,P=[];
+  function size(){W=c.width=innerWidth;H=c.height=innerHeight}
+  size();addEventListener('resize',size);
+  function spawn(){return{x:Math.random()*W,y:H+10,r:Math.random()*2.2+.6,vy:Math.random()*.9+.35,vx:(Math.random()-.5)*.4,ph:Math.random()*6.28,life:Math.random()*.6+.4}}
+  for(var i=0;i<70;i++){var p=spawn();p.y=Math.random()*H;P.push(p)}
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function loop(){
+    g.clearRect(0,0,W,H);
+    var col=getComputedStyle(root).getPropertyValue('--heat').trim()||'#ff5a1f';
+    P.forEach(function(p,i){
+      p.y-=p.vy*intensity;p.ph+=.03;p.x+=p.vx+Math.sin(p.ph)*.4;
+      var a=Math.max(0,Math.min(1,p.y/H))*p.life;
+      if(p.y<-10){P[i]=spawn();return}
+      g.beginPath();g.fillStyle=col;g.globalAlpha=a;g.shadowColor=col;g.shadowBlur=10;
+      g.arc(p.x,p.y,p.r,0,6.283);g.fill();
+    });
+    g.globalAlpha=1;
+    if(!reduce)requestAnimationFrame(loop);
+  }
+  loop();
+  heat();
+
+  // form
+  document.getElementById('form').addEventListener('submit',function(e){
+    e.preventDefault();
+    document.getElementById('ok').textContent='C\'est noté. Démo uniquement : rien n\'a été envoyé. À très vite, ça va chauffer.';
+    e.target.reset();
+  });
+})();
+</script>
+</body>
+</html>
